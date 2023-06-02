@@ -7,6 +7,7 @@ export interface AuthState {
   refreshToken: string;
   publicKey: string;
   privateKey: string;
+  networkAccountId: string;
 }
 
 const initialState: AuthState = {
@@ -15,6 +16,7 @@ const initialState: AuthState = {
   refreshToken: '',
   publicKey: '',
   privateKey: '',
+  networkAccountId: '',
 };
 
 export const authSlice = createSlice({
@@ -30,6 +32,7 @@ export const authSlice = createSlice({
     }).addCase(loadUserProfile.fulfilled, (state, action) => {
       state.privateKey = action.payload.privateKey;
       state.publicKey = action.payload.publicKey;
+      state.networkAccountId = action.payload.networkAccountId;
     });
   }});
 
