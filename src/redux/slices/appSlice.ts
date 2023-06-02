@@ -1,9 +1,15 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {loadUserProfile} from "@/redux/actions/auth.actions.ts";
 
 export interface AppState {
   appLoading: boolean,
   theme: 'light' | 'dark',
   sidebarOpened: boolean,
+  profile?: {
+    fullName: string;
+    email: string;
+    avatar: string;
+  }
 }
 
 const initialState: AppState = {
@@ -23,6 +29,11 @@ export const appSlice = createSlice({
       state.theme = action.payload;
     },
   },
+  extraReducers: builder => {
+    builder.addCase(loadUserProfile.fulfilled, (state, action) => {
+      state.profile = action.payload.profile;
+    });
+  }
 });
 
 export const {

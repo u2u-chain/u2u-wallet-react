@@ -1,6 +1,7 @@
 import React from "react";
-import {Layout, Menu, MenuProps} from "antd";
+import {Button, Layout, Menu, MenuProps, theme} from "antd";
 import {LaptopOutlined, NotificationOutlined, UserOutlined} from "@ant-design/icons";
+import styles from './wallet-layout.module.css';
 
 const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
   const key = String(index + 1);
@@ -21,15 +22,27 @@ const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOu
 });
 
 export default function WalletSideBar() {
+  const {token: {
+    colorBgContainer
+  }} = theme.useToken();
   return (
     <Layout.Sider>
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        style={{ height: '100%', borderRight: 0 }}
-        items={items2}
-      />
+      <div className={styles.siderOuter}>
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          style={{ height: '100%', borderRight: 0, backgroundColor: colorBgContainer }}
+          items={items2}
+        />
+        <div className={styles.userAction} style={{backgroundColor: colorBgContainer}}>
+          <Button
+            block
+          >
+            Edward Nguyen
+          </Button>
+        </div>
+      </div>
     </Layout.Sider>
   )
 }

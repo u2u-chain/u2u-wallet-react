@@ -1,16 +1,20 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {doSignIn} from "@/redux/actions/auth.actions.ts";
+import {doSignIn, loadUserProfile} from "@/redux/actions/auth.actions.ts";
 
 export interface AuthState {
   isLoggedIn?: boolean;
   accessToken: string;
   refreshToken: string;
+  publicKey: string;
+  privateKey: string;
 }
 
 const initialState: AuthState = {
   isLoggedIn: false,
   accessToken: '',
-  refreshToken: ''
+  refreshToken: '',
+  publicKey: '',
+  privateKey: '',
 };
 
 export const authSlice = createSlice({
@@ -23,6 +27,9 @@ export const authSlice = createSlice({
       state.isLoggedIn = true;
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
+    }).addCase(loadUserProfile.fulfilled, (state, action) => {
+      state.privateKey = action.payload.privateKey;
+      state.publicKey = action.payload.publicKey;
     });
   }});
 

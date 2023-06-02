@@ -1,0 +1,13 @@
+.siderOuter {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.siderMenu {
+  flex: 1;
+}
+
+.userAction {
+  padding: 8px;
+}

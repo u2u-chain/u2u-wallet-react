@@ -7,7 +7,7 @@ import {appSlice, AppState} from "@/redux/slices/appSlice.ts";
 import {authSlice, AuthState} from "@/redux/slices/authSlice.ts";
 
 const rootPersistConfig = {
-  key: 'root',
+  key: 'u2u-wallet',
   storage,
   whitelist: ['app'],
   stateReconciler: autoMergeLevel2,
