@@ -23,8 +23,8 @@ export default function WalletLayout() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    if (!profile) dispatch(loadUserProfile());
-  }, [profile]);
+    if (isLoggedIn && !profile) dispatch(loadUserProfile());
+  }, [profile, isLoggedIn]);
 
   useEffect(() => {
     if (networkAccountId && privateKey) {
