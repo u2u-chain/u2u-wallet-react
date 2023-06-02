@@ -9,7 +9,7 @@ export default function WalletSideBar() {
     colorBgContainer
   }} = theme.useToken();
   return (
-    <Layout.Sider>
+    <Layout.Sider width={260}>
       <div className={styles.siderOuter}>
         <div className={styles.logoSection} style={{backgroundColor: colorBgContainer}}>
           <Typography.Text>

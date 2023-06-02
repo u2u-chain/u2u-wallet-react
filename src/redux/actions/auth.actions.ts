@@ -10,3 +10,9 @@ export const doSignIn = createAsyncThunk('auth/sign-in', async (signInData: any,
 export const loadUserProfile = createAsyncThunk('app/load-profile', async () => {
   return await ApiService.getProfile();
 })
+
+export const doSignOut = createAsyncThunk('auth/sign-out', async () => {
+  localStorage.clear();
+  location.reload();
+  return;
+});
