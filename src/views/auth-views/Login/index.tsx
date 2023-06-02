@@ -1,22 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Button, Form, Input, message, Typography} from "antd";
 import styles from './login.module.css';
 import ApiService from "@/services/ApiService.ts";
 import {Link} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
+import {doSignIn} from "@/redux/actions/auth.actions.ts";
 
 export default function LoginPage() {
   const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
 
-  const onFinish = (values: any) => {
-    console.log('values', values);
-    ApiService.login(values.email, values.password).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-      if (error.response && error.response.data) {
-        message.error(error.response.data.message)
-      }
-    });
+  const onFinish = async (values: any) => {
+    const response = await dispatch(doSignIn(values)) as any;
+    if (response.error) {
+      message.error(response.error.message);
+    } else {
+      message.success('Login success');
+    }
   }
 
   return (

@@ -1,9 +1,10 @@
-import React, {ReactNode} from "react";
+import React from "react";
+import {Outlet} from "react-router-dom";
 
-export default function AppLayout({children}: {children: ReactNode}) {
+export default function AppLayout() {
   return (
     <>
-      {children}
+      <Outlet/>
     </>
   )
 }

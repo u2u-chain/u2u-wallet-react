@@ -9,11 +9,7 @@ class ApiService {
   }
 
   createAccount(signUpFormData: any) {
-    return this.api('POST', 'auth/register', signUpFormData).then(response => {
-      return response.data;
-    }).catch(e => {
-      return Promise.reject(e.response.data);
-    });
+    return this.api('POST', 'auth/register', signUpFormData);
   }
 
   api(method: string, endpoint: string, data: any) {
@@ -21,7 +17,11 @@ class ApiService {
       method,
       url: `${import.meta.env.VITE_APP_API_BASE}/${endpoint}`,
       data,
-    })
+    }).then(response => {
+      return response.data;
+    }).catch(e => {
+      return Promise.reject(e.response.data);
+    });
   }
 }
 
