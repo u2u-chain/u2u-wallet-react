@@ -3,7 +3,8 @@ import {Button, Card, Col, List, Row, Space} from "antd";
 import TransferForm from "@/components/app/wallet/TransferForm.tsx";
 import {CheckOutlined, DeleteOutlined, LoadingOutlined, WarningOutlined} from "@ant-design/icons";
 import HederaService from "@/services/HederaService.ts";
-import {useAppSelector} from "@/redux/store.ts";
+import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
+import {loadAccountBalance} from "@/redux/actions/app.actions.ts";
 
 
 export interface Transaction {
@@ -17,25 +18,37 @@ export default function SendPage() {
   const {networkAccountId} = useAppSelector(state => state.auth);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
+  const dispatch = useAppDispatch();
+
   const send = async () => {
     setTransactions([...transactions.map(t => {
       t.status = 'loading';
       return t;
     })]);
 
+    let promises = [];
+
     for (let tx of transactions) {
-      HederaService.sendTokens(networkAccountId, tx.recipient, tx.amount).then(response => {
-        setTransactions([...transactions.map((t) => {
-          if (t === tx) t.status = 'success';
-          return t;
-        })])
-      }).catch(error => {
-        setTransactions([...transactions.map((t) => {
-          if (t === tx) t.status = 'error';
-          return t;
-        })])
-      });
+      promises.push(new Promise(_ => {
+        HederaService.sendTokens(networkAccountId, tx.recipient, tx.amount).then(response => {
+          setTransactions([...transactions.map((t) => {
+            if (t === tx) t.status = 'success';
+            return t;
+          })]);
+          _(null);
+        }).catch(error => {
+          setTransactions([...transactions.map((t) => {
+            if (t === tx) t.status = 'error';
+            return t;
+          })]);
+          _(null);
+        });
+      }));
     }
+
+    Promise.all(promises).then(() => {
+      dispatch(loadAccountBalance());
+    });
   }
 
   return (
