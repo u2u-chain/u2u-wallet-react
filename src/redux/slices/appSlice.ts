@@ -14,6 +14,7 @@ export interface AppState {
   },
   loadingBalance: boolean;
   balance: number;
+  currencyLoading: boolean;
   currencyCode: string;
   currencyRate: number;
 }
@@ -24,6 +25,7 @@ const initialState: AppState = {
   sidebarOpened: false,
   loadingBalance: false,
   balance: 0,
+  currencyLoading: false,
   currencyCode: 'usd',
   currencyRate: 1,
 };
@@ -51,9 +53,12 @@ export const appSlice = createSlice({
     }).addCase(loadAccountBalance.fulfilled, (state, action) => {
       state.balance = action.payload;
       state.loadingBalance = false;
+    }).addCase(loadPrice.pending, (state) => {
+      state.currencyLoading = true;
     }).addCase(loadPrice.fulfilled, (state, action) => {
       if (action.payload[COIN_CODE] && action.payload[COIN_CODE][state.currencyCode])
         state.currencyRate = action.payload[COIN_CODE][state.currencyCode];
+      state.currencyLoading = false;
     });
   }
 });

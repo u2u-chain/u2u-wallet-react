@@ -7,6 +7,7 @@ import styles from './wallet.module.css';
 import {Link} from "react-router-dom";
 import TokensTable from "@/components/app/assets/TokensTable";
 import Collectibles from "@/components/app/assets/Collectibles";
+import CurrencyWrapper from "@/components/app/wallet/CurrencyWrapper.tsx";
 
 
 export default function WalletPage() {
@@ -40,7 +41,9 @@ export default function WalletPage() {
               <Space>
                 <WalletOutlined/>
                 <div style={{color: "#00b96b", fontWeight: 700}}>
-                  {calculatedPrice}
+                  <CurrencyWrapper>
+                    {calculatedPrice}
+                  </CurrencyWrapper>
                 </div>
                 <a onClick={reloadPrice}><RedoOutlined/></a>
               </Space>

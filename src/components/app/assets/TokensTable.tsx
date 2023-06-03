@@ -2,6 +2,7 @@ import React from "react";
 import {Table} from "antd";
 import {ColumnsType} from "antd/es/table";
 import {useAppSelector} from "@/redux/store.ts";
+import CurrencyWrapper from "@/components/app/wallet/CurrencyWrapper.tsx";
 
 interface DataType {
   key: string;
@@ -75,9 +76,9 @@ export default function TokensTable() {
         const calculatedPrice = formatter.format(balance * currencyRate);
 
         return (
-          <div>
+          <CurrencyWrapper>
             {calculatedPrice}
-          </div>
+          </CurrencyWrapper>
         );
       }
     },
