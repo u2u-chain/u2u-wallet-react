@@ -67,7 +67,7 @@ export default function TokensTable() {
       title: 'Total value',
       dataIndex: 'totalValue',
       key: 'totalValue',
-      render: (text) => {
+      render: () => {
         const formatter = new Intl.NumberFormat('en-US', {
           style: 'currency',
           currency: currencyCode,
