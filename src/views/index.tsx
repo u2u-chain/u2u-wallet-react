@@ -5,11 +5,12 @@ import LandingPage from "@/views/app-views/Landing";
 import AuthLayout from "@/components/layouts/auth/AuthLayout.tsx";
 import LoginPage from "@/views/auth-views/Login";
 import RegisterPage from "@/views/auth-views/Register";
-import AppLayout from "@/components/layouts/AppLayout.tsx";
 import WalletPage from "@/views/app-views/Wallet";
 import WalletLayout from "@/components/layouts/wallet/WalletLayout.tsx";
-import AssetsPage from "@/views/app-views/Assets";
 import HistoryPage from "@/views/app-views/History";
+import AssetsLayout from "@/components/layouts/assets";
+import CollectiblesPage from "@/views/app-views/Assets/CollectiblesPage";
+import TokensPage from "@/views/app-views/Assets/TokensPage";
 
 export default function AppViews() {
   return (
@@ -39,11 +40,16 @@ export default function AppViews() {
             index
             element={<WalletPage />}
           />
-          <Route
-            path="assets"
-            index
-            element={<AssetsPage />}
-          />
+          <Route path={"assets"} element={<AssetsLayout />}>
+            <Route
+              path={'tokens'}
+              element={<TokensPage />}
+            />
+            <Route
+              path={'collectibles'}
+              element={<CollectiblesPage />}
+            />
+          </Route>
           <Route
             path="history"
             index

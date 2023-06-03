@@ -7,8 +7,8 @@ const routes = [{
   key: '/wallet',
   label: 'Home'
 }, {
-  url: '/wallet/assets',
-  key: '/wallet/assets',
+  url: '/wallet/assets/tokens',
+  key: '/wallet/assets/tokens',
   label: 'Assets'
 }, {
   url: '/wallet/history',

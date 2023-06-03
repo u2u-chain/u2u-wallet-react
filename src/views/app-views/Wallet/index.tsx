@@ -1,11 +1,12 @@
 import {useEffect} from "react";
-import {Card, Col, Empty, Row, Tooltip} from "antd";
+import {Card, Col, Row, Tooltip} from "antd";
 import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
 import {loadAccountBalance} from "@/redux/actions/app.actions.ts";
 import {RedoOutlined, SendOutlined, WalletOutlined} from "@ant-design/icons";
 import styles from './wallet.module.css';
 import {Link} from "react-router-dom";
 import TokensTable from "@/components/app/assets/TokensTable";
+import Collectibles from "@/components/app/assets/Collectibles";
 
 
 export default function WalletPage() {
@@ -40,13 +41,13 @@ export default function WalletPage() {
       </Card>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
-          <Card title={'Assets'} extra={<Link to={'/wallet/assets'}>View all</Link>}>
+          <Card title={'Assets'} extra={<Link to={'/wallet/assets/tokens'}>View all</Link>}>
             <TokensTable />
           </Card>
         </Col>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
-          <Card title={'Collectibles'} extra={<Link to={'#'}>View all</Link>}>
-            <Empty description={'Looks like you don\'t have any collectibles yet.'} />
+          <Card title={'Collectibles'} extra={<Link to={'/wallet/assets/collectibles'}>View all</Link>}>
+            <Collectibles />
           </Card>
         </Col>
       </Row>

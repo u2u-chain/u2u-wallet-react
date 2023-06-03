@@ -1,0 +1,28 @@
+.pageHeaderCard {
+  padding-bottom: 40px;
+}
+
+.pageTitle {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.menu {
+  margin-bottom: -25px;
+  margin-left: -16px;
+}
+
+.tabsContainer {
+  margin-top: -46px;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.item {
+  margin-left: 16px;
+}
+
+.tabsMenu {
+  margin-left: 16px;
+}
+
