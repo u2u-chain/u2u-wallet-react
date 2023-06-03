@@ -1,4 +1,3 @@
-import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MarketingLayout from "@/components/layouts/marketing/MarketingLayout.tsx";
 import LandingPage from "@/views/app-views/Landing";
@@ -11,6 +10,11 @@ import HistoryPage from "@/views/app-views/History";
 import AssetsLayout from "@/components/layouts/assets";
 import CollectiblesPage from "@/views/app-views/Assets/CollectiblesPage";
 import TokensPage from "@/views/app-views/Assets/TokensPage";
+import HistoryLayout from "@/components/layouts/history";
+import SentHistoryPage from "@/views/app-views/History/SentHistory";
+import ReceivedHistoryPage from "@/views/app-views/History/ReceivedHistory";
+import TokensHistoryPage from "@/views/app-views/History/TokensHistory";
+import AccountHistoryPage from "@/views/app-views/History/AccountHistory";
 
 export default function AppViews() {
   return (
@@ -50,11 +54,28 @@ export default function AppViews() {
               element={<CollectiblesPage />}
             />
           </Route>
-          <Route
-            path="history"
-            index
-            element={<HistoryPage />}
-          />
+          <Route path={'history'} element={<HistoryLayout />} >
+            <Route
+              index
+              element={<HistoryPage />}
+            />
+            <Route
+              path={'sent'}
+              element={<SentHistoryPage />}
+            />
+            <Route
+              path={'received'}
+              element={<ReceivedHistoryPage />}
+            />
+            <Route
+              path={'tokens'}
+              element={<TokensHistoryPage />}
+            />
+            <Route
+              path={'account'}
+              element={<AccountHistoryPage />}
+            />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

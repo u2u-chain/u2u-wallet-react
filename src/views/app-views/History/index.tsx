@@ -1,21 +1,11 @@
-import React, {useEffect} from "react";
-import {Card, Typography} from "antd";
-import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
-import {loadAccountBalance} from "@/redux/actions/app.actions.ts";
+import {Card, Empty} from "antd";
 
 export default function HistoryPage() {
-  const {isLoggedIn} = useAppSelector(state => state.auth);
-  const {balance} = useAppSelector(state => state.app);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (isLoggedIn) dispatch(loadAccountBalance());
-  }, [isLoggedIn]);
 
   return (
     <>
       <Card>
-        {balance} bars
+        <Empty description={'No transactions found on the explorer.'} />
       </Card>
     </>
   )
