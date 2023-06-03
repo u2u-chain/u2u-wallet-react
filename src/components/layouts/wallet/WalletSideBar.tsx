@@ -2,12 +2,14 @@ import React from "react";
 import {Avatar, Button, Divider, Layout, Menu, MenuProps, theme, Typography} from "antd";
 import styles from './wallet-layout.module.css';
 import {useAppSelector} from "@/redux/store.ts";
+import {WalletMenuContent} from "@/components/layouts/wallet/WalletMenuContent.tsx";
 
 export default function WalletSideBar() {
   const {profile} = useAppSelector(state => state.app);
   const {token: {
     colorBgContainer
   }} = theme.useToken();
+
   return (
     <Layout.Sider width={260}>
       <div className={styles.siderOuter}>
@@ -16,28 +18,7 @@ export default function WalletSideBar() {
             U2U Wallet
           </Typography.Text>
         </div>
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          style={{ height: '100%', borderRight: 0, backgroundColor: colorBgContainer }}
-          items={[{
-            key: 'home',
-            label: 'Home'
-          }, {
-            key: 'assets',
-            label: 'Assets',
-          }, {
-            key: 'history',
-            label: 'History'
-          }, {
-            key: 'keys',
-            label: 'Keys'
-          }, {
-            key: 'tools',
-            label: 'Tools'
-          }]}
-        />
+        <WalletMenuContent/>
         <div className={styles.userAction} style={{backgroundColor: colorBgContainer}}>
           <Button
             block

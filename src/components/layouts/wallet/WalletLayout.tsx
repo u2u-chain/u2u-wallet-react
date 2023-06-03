@@ -23,6 +23,7 @@ export default function WalletLayout() {
   }, [isLoggedIn]);
 
   useEffect(() => {
+    console.log(profile);
     if (isLoggedIn && !profile) dispatch(loadUserProfile());
   }, [profile, isLoggedIn]);
 

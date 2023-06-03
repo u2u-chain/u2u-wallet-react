@@ -45,10 +45,10 @@ export default function MarketingNavBar(props: MarketingNavBarProps) {
       </div>
       <div className={styles.actions}>
         <Space>
-          <Button type={'text'}>
+          <Button type={'text'} href={'/auth/login'}>
             Access
           </Button>
-          <Button type={'primary'} shape={'round'}>
+          <Button type={'primary'} shape={'round'} href={'/auth/register'}>
             Create Wallet
           </Button>
         </Space>

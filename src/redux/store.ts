@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import {appSlice, AppState} from "@/redux/slices/appSlice.ts";
 import {authSlice, AuthState} from "@/redux/slices/authSlice.ts";
+import {encryptTransform} from "redux-persist-transform-encrypt";
 
 const rootPersistConfig = {
   key: 'u2u-wallet',
@@ -24,6 +25,14 @@ const authPersistConfig = {
   storage,
   blacklist: ['appLoading'],
   stateReconciler: autoMergeLevel2,
+  transforms: [
+    encryptTransform({
+      secretKey: 'u2u-wallet-secret-key-to-prevent-noobs',
+      onError: function (error) {
+        // Handle the error.
+      },
+    }),
+  ],
 };
 
 const persistedReducer = persistReducer<any>(rootPersistConfig, combineReducers({

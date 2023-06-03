@@ -8,6 +8,8 @@ import RegisterPage from "@/views/auth-views/Register";
 import AppLayout from "@/components/layouts/AppLayout.tsx";
 import WalletPage from "@/views/app-views/Wallet";
 import WalletLayout from "@/components/layouts/wallet/WalletLayout.tsx";
+import AssetsPage from "@/views/app-views/Assets";
+import HistoryPage from "@/views/app-views/History";
 
 export default function AppViews() {
   return (
@@ -36,6 +38,16 @@ export default function AppViews() {
             path=""
             index
             element={<WalletPage />}
+          />
+          <Route
+            path="assets"
+            index
+            element={<AssetsPage />}
+          />
+          <Route
+            path="history"
+            index
+            element={<HistoryPage />}
           />
         </Route>
       </Routes>
