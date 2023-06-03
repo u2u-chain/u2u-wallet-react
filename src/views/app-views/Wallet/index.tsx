@@ -33,10 +33,10 @@ export default function WalletPage() {
         </p>
         <div className={styles.wrapper}>
           <div>
-            <p className={styles.text}>
-              Total value
-            </p>
-            <p className={styles.value}>
+            <div className={styles.text}>
+              Total value ({balance})
+            </div>
+            <div className={styles.value}>
               <Space>
                 <WalletOutlined/>
                 <div style={{color: "#00b96b", fontWeight: 700}}>
@@ -44,7 +44,7 @@ export default function WalletPage() {
                 </div>
                 <a onClick={reloadPrice}><RedoOutlined/></a>
               </Space>
-            </p>
+            </div>
           </div>
           <Tooltip title={"Send"} placement="bottom">
             <a className={styles.icon} href={'/wallet/send'}>
