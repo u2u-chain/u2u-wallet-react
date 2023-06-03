@@ -1,0 +1,26 @@
+.title {
+  margin: 0;
+  font-size: 30px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+.value {
+  margin: 0;
+  font-size: 40px;
+}
+
+.icon {
+  font-size: 48px;
+  margin: 0;
+  cursor: pointer;
+}

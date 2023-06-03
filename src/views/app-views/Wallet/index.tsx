@@ -1,9 +1,10 @@
 import {useEffect} from "react";
-import {Card, Col, Empty, Row, Table} from "antd";
+import {Card, Col, Empty, Row, Table, Tooltip} from "antd";
 import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
 import {loadAccountBalance} from "@/redux/actions/app.actions.ts";
 import {RedoOutlined, SendOutlined, WalletOutlined} from "@ant-design/icons";
 import {ColumnsType} from "antd/es/table";
+import styles from './wallet.module.css';
 
 interface DataType {
   key: string;
@@ -11,7 +12,7 @@ interface DataType {
   token: string;
   symbol: string;
   amount: number;
-  totalValue: number
+  totalValue: number;
 }
 
 const columns: ColumnsType<DataType> = [
@@ -27,7 +28,6 @@ const columns: ColumnsType<DataType> = [
           <span style={{fontWeight: 500}}>({record.symbol})</span>
         </div>
       )
-      console.log('record', record);
     },
   },
   {
@@ -105,23 +105,23 @@ export default function WalletPage() {
   return (
     <>
       <Card style={{marginBottom: 16}}>
-        <div>
-          <p style={{margin: 0, fontSize: 30}}>
-            Hey there, <strong>{networkAccountId}</strong>
-          </p>
-          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
-            <div>
-              <p style={{fontSize: 16, margin: '20px 0'}}>
-                Total value
-              </p>
-              <p style={{margin: 0, fontSize: 42}}>
-                <WalletOutlined /> <span style={{color: "#00b96b", fontWeight: 700}}>$507.49</span> <a><RedoOutlined /></a>
-              </p>
-            </div>
-            <p style={{fontSize: 52, margin: 0}}>
-              <SendOutlined />
+        <p className={styles.title}>
+          Hey there, <strong>{networkAccountId}</strong>
+        </p>
+        <div className={styles.wrapper}>
+          <div>
+            <p className={styles.text}>
+              Total value
+            </p>
+            <p className={styles.value}>
+              <WalletOutlined /> <span style={{color: "#00b96b", fontWeight: 700}}>$507.49</span> <a><RedoOutlined /></a>
             </p>
           </div>
+          <Tooltip title={"Send"} placement="bottom">
+            <p className={styles.icon}>
+              <SendOutlined />
+            </p>
+          </Tooltip>
         </div>
       </Card>
       <Row gutter={[16, 16]}>
