@@ -15,65 +15,70 @@ import SentHistoryPage from "@/views/app-views/History/SentHistory";
 import ReceivedHistoryPage from "@/views/app-views/History/ReceivedHistory";
 import TokensHistoryPage from "@/views/app-views/History/TokensHistory";
 import AccountHistoryPage from "@/views/app-views/History/AccountHistory";
+import SendPage from "@/views/app-views/Wallet/Send";
 
 export default function AppViews() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MarketingLayout />}>
+        <Route path="/" element={<MarketingLayout/>}>
           <Route
             path="/"
             index
-            element={<LandingPage />}
+            element={<LandingPage/>}
           />
         </Route>
-        <Route path="/auth" element={<AuthLayout />}>
+        <Route path="/auth" element={<AuthLayout/>}>
           <Route
             path="login"
             index
-            element={<LoginPage />}
+            element={<LoginPage/>}
           />
           <Route
             path="register"
-            element={<RegisterPage />}
+            element={<RegisterPage/>}
           />
         </Route>
-        <Route path="/wallet" element={<WalletLayout />}>
+        <Route path="/wallet" element={<WalletLayout/>}>
           <Route
             path=""
             index
-            element={<WalletPage />}
+            element={<WalletPage/>}
           />
-          <Route path={"assets"} element={<AssetsLayout />}>
+          <Route
+            path={'send'}
+            element={<SendPage/>}
+          />
+          <Route path={"assets"} element={<AssetsLayout/>}>
             <Route
               path={'tokens'}
-              element={<TokensPage />}
+              element={<TokensPage/>}
             />
             <Route
               path={'collectibles'}
-              element={<CollectiblesPage />}
+              element={<CollectiblesPage/>}
             />
           </Route>
-          <Route path={'history'} element={<HistoryLayout />} >
+          <Route path={'history'} element={<HistoryLayout/>}>
             <Route
               index
-              element={<HistoryPage />}
+              element={<HistoryPage/>}
             />
             <Route
               path={'sent'}
-              element={<SentHistoryPage />}
+              element={<SentHistoryPage/>}
             />
             <Route
               path={'received'}
-              element={<ReceivedHistoryPage />}
+              element={<ReceivedHistoryPage/>}
             />
             <Route
               path={'tokens'}
-              element={<TokensHistoryPage />}
+              element={<TokensHistoryPage/>}
             />
             <Route
               path={'account'}
-              element={<AccountHistoryPage />}
+              element={<AccountHistoryPage/>}
             />
           </Route>
         </Route>

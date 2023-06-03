@@ -47,9 +47,9 @@ export default function WalletPage() {
             </p>
           </div>
           <Tooltip title={"Send"} placement="bottom">
-            <p className={styles.icon}>
+            <a className={styles.icon} href={'/wallet/send'}>
               <SendOutlined/>
-            </p>
+            </a>
           </Tooltip>
         </div>
       </Card>
