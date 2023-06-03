@@ -1,98 +1,12 @@
 import {useEffect} from "react";
-import {Card, Col, Empty, Row, Table, Tooltip} from "antd";
+import {Card, Col, Empty, Row, Tooltip} from "antd";
 import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
 import {loadAccountBalance} from "@/redux/actions/app.actions.ts";
 import {RedoOutlined, SendOutlined, WalletOutlined} from "@ant-design/icons";
-import {ColumnsType} from "antd/es/table";
 import styles from './wallet.module.css';
+import {Link} from "react-router-dom";
+import TokensTable from "@/components/app/assets/TokensTable";
 
-interface DataType {
-  key: string;
-  image?: string;
-  token: string;
-  symbol: string;
-  amount: number;
-  totalValue: number;
-}
-
-const columns: ColumnsType<DataType> = [
-  {
-    title: 'Token',
-    dataIndex: 'token',
-    key: 'token',
-    render: (_, record) => {
-      return(
-        <div style={{display: "flex", alignItems: "center"}}>
-          <img width={40} height={40} src={record.image} alt="image"/>
-          <span style={{padding: '0 8px', fontWeight: 500}}>{record.token}</span>
-          <span style={{fontWeight: 500}}>({record.symbol})</span>
-        </div>
-      )
-    },
-  },
-  {
-    title: 'Amount',
-    dataIndex: 'amount',
-    key: 'amount',
-    render: (text) => {
-      const [integerPart, decimalPart] = text.toString().split(".");
-      const decimalPartBlur = decimalPart.substring(0, 2);
-
-      let formattedIntegerPart = integerPart;
-      if (parseInt(integerPart) >= 1000) {
-        formattedIntegerPart = parseInt(integerPart).toLocaleString();
-      }
-
-      const formattedText = (
-        <span>
-          {formattedIntegerPart}.
-          <span>{decimalPartBlur}</span>
-          <span style={{ opacity: 0.5 }}>{decimalPart.substring(2)}</span>
-        </span>
-      );
-
-      return formattedText;
-    }
-  },
-  {
-    title: 'Total value',
-    dataIndex: 'totalValue',
-    key: 'totalValue',
-    render: (text) => {
-      const [integerPart, decimalPart] = text.toString().split(".");
-      const decimalPartBlur = decimalPart.substring(0, 2);
-
-      let formattedIntegerPart = integerPart;
-      if (parseInt(integerPart) >= 1000) {
-        formattedIntegerPart = parseInt(integerPart).toLocaleString();
-      }
-
-      const formattedText = (
-        <span>
-          $ {" "}
-          {formattedIntegerPart}.
-          <span>{decimalPartBlur}</span>
-          <span style={{ opacity: 0.5 }}>{decimalPart.substring(2)}</span>
-        </span>
-      );
-
-      return formattedText;
-    }
-  },
-
-
-];
-
-const data: DataType[] = [
-  {
-    key: '1',
-    image: 'https://portal.hedera.com/assets/hedera-logo-black-a0b1bd4f.svg',
-    token: 'Hedera',
-    symbol: 'HBAR',
-    amount: 9999.99151988,
-    totalValue: 507.49
-  }
-];
 
 export default function WalletPage() {
   const {isLoggedIn, networkAccountId} = useAppSelector(state => state.auth);
@@ -126,12 +40,12 @@ export default function WalletPage() {
       </Card>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
-          <Card title={'Assets'} extra={<a href="#">View all</a>}>
-            <Table columns={columns} dataSource={data} pagination={false} />
+          <Card title={'Assets'} extra={<Link to={'/wallet/assets'}>View all</Link>}>
+            <TokensTable />
           </Card>
         </Col>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
-          <Card title={'Collectibles'} extra={<a href="#">View all</a>}>
+          <Card title={'Collectibles'} extra={<Link to={'#'}>View all</Link>}>
             <Empty description={'Looks like you don\'t have any collectibles yet.'} />
           </Card>
         </Col>
