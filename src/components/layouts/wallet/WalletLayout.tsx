@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
-import {Avatar, Button, Layout, Menu, MenuProps, message} from "antd";
+import {Drawer, Layout, message, theme} from "antd";
 import WalletSideBar from "@/components/layouts/wallet/WalletSideBar.tsx";
 import {loadUserProfile} from "@/redux/actions/auth.actions.ts";
 import WalletHeader from "@/components/layouts/wallet/WalletHeader.tsx";
@@ -11,10 +11,37 @@ import {loadPrice} from "@/redux/actions/app.actions.ts";
 
 
 export default function WalletLayout() {
+  const [collapsed, setCollapsed] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const {isLoggedIn, accessToken, networkAccountId, privateKey, publicKey} = useAppSelector(state => state.auth);
   const {profile, currencyCode} = useAppSelector(state => state.app);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const {
+    token: { colorBgContainer, colorText },
+  } = theme.useToken();
+
+  const [width, setWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth: 0);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    }
+  }, []);
+
+  const isMobile = width <= 768;
+
+  useEffect(() => {
+    if (isMobile) setCollapsed(true)
+  }, [isMobile]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -44,9 +71,48 @@ export default function WalletLayout() {
 
   return (
     <Layout>
-      <WalletSideBar/>
+      {
+        isClient && (
+          <>
+            {
+              isMobile ? (
+                <>
+                  <Drawer
+                    open={!collapsed}
+                    headerStyle={{display: 'none'}}
+                    bodyStyle={{padding: 0, backgroundColor: colorBgContainer}}
+                    onClose={() => setCollapsed(true)}
+                    placement={'left'}
+                    width={300}
+                  >
+                    <WalletSideBar collapsed={collapsed}/>
+                  </Drawer>
+                </>
+              ) : (
+                <Layout.Sider
+                  breakpoint="lg"
+                  collapsed={collapsed}
+                  width={260}
+                  style={{
+                    background: colorBgContainer,
+                    borderRight: '1px solid #00000011',
+                  }}
+                  onBreakpoint={(broken) => {
+                    console.log(broken);
+                  }}
+                  onCollapse={(isCollapsed) => {
+                    setCollapsed(isCollapsed);
+                  }}
+                >
+                  <WalletSideBar collapsed={collapsed} />
+                </Layout.Sider>
+              )
+            }
+          </>
+        )
+      }
       <Layout>
-        <WalletHeader/>
+        <WalletHeader collapsed={collapsed} toggleCollapsed={() => setCollapsed(!collapsed)} />
         <Layout.Content className={styles.content}>
           <Outlet/>
         </Layout.Content>

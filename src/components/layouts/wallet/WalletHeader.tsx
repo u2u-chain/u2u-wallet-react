@@ -1,20 +1,28 @@
 import React from "react";
 import styles from "@/components/layouts/wallet/wallet-layout.module.css";
 import {Avatar, Button, Dropdown, Select, Space} from "antd";
-import {MenuUnfoldOutlined} from "@ant-design/icons";
+import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
 import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
 import {doSignOut} from "@/redux/actions/auth.actions.ts";
 import {setCurrency} from "@/redux/slices/appSlice.ts";
 
-export default function WalletHeader() {
+interface WalletHeaderProps {
+  collapsed: boolean,
+  toggleCollapsed: () => void
+}
+
+export default function WalletHeader({collapsed, toggleCollapsed}: WalletHeaderProps) {
   const {profile, currencyCode} = useAppSelector(state => state.app);
   const dispatch = useAppDispatch();
 
   return (
     <div className={styles.header}>
-      <Button type={'text'} size={'large'}>
-        <MenuUnfoldOutlined/>
-      </Button>
+      <Button
+        type={'text'}
+        size={'large'}
+        icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
+        onClick={toggleCollapsed}
+      />
       <Space size={'large'}>
         <Select
           defaultValue={currencyCode}
