@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {loadUserProfile} from "@/redux/actions/auth.actions.ts";
-import {loadAccountBalance} from "@/redux/actions/app.actions.ts";
+import {loadAccountBalance, loadPrice} from "@/redux/actions/app.actions.ts";
+import {COIN_CODE} from "@/configs/app.config.ts";
 
 export interface AppState {
   appLoading: boolean,
@@ -13,6 +14,8 @@ export interface AppState {
   },
   loadingBalance: boolean;
   balance: number;
+  currencyCode: string;
+  currencyRate: number;
 }
 
 const initialState: AppState = {
@@ -21,6 +24,8 @@ const initialState: AppState = {
   sidebarOpened: false,
   loadingBalance: false,
   balance: 0,
+  currencyCode: 'usd',
+  currencyRate: 1,
 };
 
 export const appSlice = createSlice({
@@ -33,6 +38,9 @@ export const appSlice = createSlice({
     setTheme(state, action: PayloadAction<'light' | 'dark'>) {
       state.theme = action.payload;
     },
+    setCurrency(state, action: PayloadAction<string>) {
+      state.currencyCode = action.payload;
+    }
   },
   extraReducers: builder => {
     builder.addCase(loadUserProfile.fulfilled, (state, action) => {
@@ -43,6 +51,9 @@ export const appSlice = createSlice({
     }).addCase(loadAccountBalance.fulfilled, (state, action) => {
       state.balance = action.payload;
       state.loadingBalance = false;
+    }).addCase(loadPrice.fulfilled, (state, action) => {
+      if (action.payload[COIN_CODE] && action.payload[COIN_CODE][state.currencyCode])
+        state.currencyRate = action.payload[COIN_CODE][state.currencyCode];
     });
   }
 });
@@ -50,6 +61,7 @@ export const appSlice = createSlice({
 export const {
   setSideBarOpened,
   setTheme,
+  setCurrency,
 } = appSlice.actions;
 
 export default appSlice.reducer;
