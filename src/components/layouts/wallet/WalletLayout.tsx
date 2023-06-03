@@ -7,13 +7,14 @@ import {loadUserProfile} from "@/redux/actions/auth.actions.ts";
 import WalletHeader from "@/components/layouts/wallet/WalletHeader.tsx";
 import styles from "./wallet-layout.module.css";
 import hederaService from "@/services/HederaService.ts";
+import {loadPrice} from "@/redux/actions/app.actions.ts";
 
 
 export default function WalletLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const {isLoggedIn, accessToken, networkAccountId, privateKey, publicKey} = useAppSelector(state => state.auth);
-  const {profile} = useAppSelector(state => state.app);
+  const {profile, currencyCode} = useAppSelector(state => state.app);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
@@ -59,6 +60,10 @@ export default function WalletLayout() {
       hederaService.initialize(networkAccountId, privateKey);
     }
   }, [networkAccountId, privateKey]);
+
+  useEffect(() => {
+    dispatch(loadPrice());
+  }, [currencyCode]);
 
   if (!profile) return <>
     Loading

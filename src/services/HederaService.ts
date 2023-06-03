@@ -1,4 +1,4 @@
-import {AccountBalanceQuery, AccountId, Client} from "@hashgraph/sdk";
+import {AccountBalanceQuery, AccountId, Client, Hbar, TransferTransaction} from "@hashgraph/sdk";
 
 class HederaService {
   client = Client.forTestnet();
@@ -18,6 +18,18 @@ class HederaService {
   async getBalance(accountId: string) {
     const balanceQuery = new AccountBalanceQuery().setAccountId(accountId);
     return await balanceQuery.execute(this.client);
+  }
+
+  async sendTokens(accountId: string, recipientId: string, amount: number) {
+    const transaction = await new TransferTransaction()
+      .addHbarTransfer(accountId, Hbar.fromTinybars(-amount)) //Sending account
+      .addHbarTransfer(recipientId, Hbar.fromTinybars(amount)) //Receiving account
+      .execute(this.client);
+    const receipt = await transaction.getReceipt(this.client);
+    return {
+      transaction,
+      receipt,
+    }
   }
 }
 
