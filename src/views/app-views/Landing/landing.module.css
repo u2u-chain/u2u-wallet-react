@@ -87,6 +87,11 @@
     border-radius: 24px;
 }
 
+.landingFeatureTitle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
 .landingFeatureDesc {
     font-size: 18px;
     color: #ffffff68;
@@ -124,6 +129,18 @@
     .heroDescription {
         font-size: 20px;
     }
+
+    .sectionTitle {
+        font-size: 50px;
+    }
+
+    .landingFeatureTitle {
+        font-size: 24px;
+    }
+
+    .landingFeatureDesc {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -142,5 +159,17 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 32px;
+    }
+
+    .sectionTitle {
+        font-size: 40px;
+    }
+
+    .landingFeatureTitle {
+        font-size: 22px;
+    }
+
+    .landingFeatureDesc {
+        font-size: 14px;
     }
 }

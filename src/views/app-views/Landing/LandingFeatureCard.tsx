@@ -7,9 +7,9 @@ export default function LandingFeatureCard() {
     className={styles.featureCard}
     bordered={false}
   >
-    <Typography.Title level={2}>
+    <Typography.Text className={styles.landingFeatureTitle}>
       Connect your Wallet
-    </Typography.Title>
+    </Typography.Text>
     <Typography.Paragraph className={styles.landingFeatureDesc}>
       Take your Web3 experience to the next level with decentralized
     </Typography.Paragraph>
