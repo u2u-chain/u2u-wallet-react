@@ -31,6 +31,10 @@ export default function SendPage() {
     for (let tx of transactions) {
       promises.push(new Promise(_ => {
         HederaService.sendTokens(networkAccountId, tx.recipient, tx.amount).then(response => {
+          console.log(response.transaction);
+          response.transaction.getReceipt(HederaService.client).then(receipt => {
+            console.log(receipt);
+          })
           setTransactions([...transactions.map((t) => {
             if (t === tx) t.status = 'success';
             return t;

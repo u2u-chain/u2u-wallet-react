@@ -5,9 +5,7 @@ export default function HistoryPage() {
 
   return (
     <>
-      <Card>
-        <TransactionsHistoryTable/>
-      </Card>
+      <TransactionsHistoryTable/>
     </>
   )
 }

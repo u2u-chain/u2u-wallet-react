@@ -4,7 +4,7 @@ import styles from './wallet-layout.module.css';
 import {useAppSelector} from "@/redux/store.ts";
 import {WalletMenuContent} from "@/components/layouts/wallet/WalletMenuContent.tsx";
 
-export default function WalletSideBar({collapsed} : boolean) {
+export default function WalletSideBar({collapsed} : {collapsed: boolean}) {
   const {profile} = useAppSelector(state => state.app);
   const {token: {
     colorBgContainer
