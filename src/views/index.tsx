@@ -15,6 +15,7 @@ import SentHistoryPage from "@/views/app-views/History/SentHistory";
 import ReceivedHistoryPage from "@/views/app-views/History/ReceivedHistory";
 import TokensHistoryPage from "@/views/app-views/History/TokensHistory";
 import AccountHistoryPage from "@/views/app-views/History/AccountHistory";
+import ToolsPage from "@/views/app-views/Tools";
 import SendPage from "@/views/app-views/Wallet/Send";
 
 export default function AppViews() {
@@ -79,6 +80,12 @@ export default function AppViews() {
             <Route
               path={'account'}
               element={<AccountHistoryPage/>}
+            />
+          </Route>
+          <Route path={"tools"}>
+            <Route
+              index
+              element={<ToolsPage />}
             />
           </Route>
         </Route>
