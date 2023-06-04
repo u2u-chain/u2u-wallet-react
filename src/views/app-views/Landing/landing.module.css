@@ -157,7 +157,9 @@
         font-size: 48px;
         line-height: 52px;
         text-align: center;
+        margin-top: 10vh;
     }
+
     .heroDescription {
         text-align: center;
         font-size: 16px;
@@ -167,7 +169,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 32px;
+        margin-bottom: 64px;
     }
 
     .sectionTitle {
