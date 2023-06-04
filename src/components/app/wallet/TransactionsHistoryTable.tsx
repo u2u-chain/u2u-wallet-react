@@ -4,6 +4,8 @@ import {useAppSelector} from "@/redux/store.ts";
 import HederaService from "@/services/HederaService.ts";
 import moment from "moment";
 import {CheckOutlined, LoadingOutlined, WarningOutlined} from "@ant-design/icons";
+import styles from './transaction-history-table.module.css';
+import {useNavigate} from "react-router-dom";
 
 export default function TransactionsHistoryTable() {
   const {networkAccountId} = useAppSelector(state => state.auth);
@@ -11,6 +13,7 @@ export default function TransactionsHistoryTable() {
   const [loading, setLoading] = useState(false);
   const [hasNext, setHasNext] = useState(false);
   const [nextLink, setNextLink] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (networkAccountId) {
@@ -36,6 +39,14 @@ export default function TransactionsHistoryTable() {
       rowKey={'transaction_hash'}
       dataSource={transactions}
       pagination={false}
+      onRow={(record, index) => {
+        return {
+          className: styles.row,
+          onClick: event => {
+            navigate('/transactions/' + record.transaction_id);
+          }
+        }
+      }}
       columns={[{
         //   key: 'transaction_id',
         //   title: 'Transaction ID',

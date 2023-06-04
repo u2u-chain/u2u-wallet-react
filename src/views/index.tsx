@@ -23,6 +23,7 @@ import Download from "@/views/app-views/Tools/Download";
 import ConvertUnits from "@/views/app-views/Tools/ConvertUnits";
 import ExportKeystore from "@/views/app-views/Tools/ExportKeystore";
 import UploadFile from "@/views/app-views/Tools/Upload";
+import TransactionsPage from "@/views/app-views/Transactions";
 
 export default function AppViews() {
   return (
@@ -44,6 +45,13 @@ export default function AppViews() {
           <Route
             path="register"
             element={<RegisterPage/>}
+          />
+        </Route>
+        <Route path={'/transactions'} element={<WalletLayout/>}>
+          <Route
+            path=":transactionId/"
+            index
+            element={<TransactionsPage/>}
           />
         </Route>
         <Route path="/wallet" element={<WalletLayout/>}>
