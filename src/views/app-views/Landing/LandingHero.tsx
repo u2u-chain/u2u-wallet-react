@@ -2,7 +2,7 @@ import styles from './landing.module.css';
 import {Button, Col, Row, Typography} from "antd";
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
-import Figure from '@/assets/images/frame.png';
+import Figure from '@/assets/images/frame1.png';
 
 export default function LandingHero() {
   return <div className={styles.hero}>
