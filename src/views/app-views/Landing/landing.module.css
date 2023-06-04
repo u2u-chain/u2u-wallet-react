@@ -1,0 +1,55 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.hero {
+    padding: 20vh 0;
+}
+
+.heroTitlePromo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+}
+
+.heroTitle {
+    font-size: 72px;
+    font-weight: bold;
+    line-height: 70px;
+}
+
+.heroDescription {
+    margin-top: 32px;
+    font-size: 1.5rem;
+    color: #ffffff68;
+}
+
+.poweredLine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.poweredLineText {
+    color: #ffffff68;
+    font-weight: bold;
+}
+
+.technology {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+.technologyIcon {
+    width: 32px;
+    margin-right: 8px;
+}
+
+.technologyName {
+    font-weight: bold;
+    font-size: 18px;
+}
