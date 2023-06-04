@@ -1,8 +1,10 @@
 import React from "react";
-import {Typography} from "antd";
+import {Card, Col, Row, Typography} from "antd";
 import Container from "@/components/common/Container.tsx";
 import LandingHero from "@/views/app-views/Landing/LandingHero.tsx";
 import styles from "./landing.module.css";
+import SectionTitle from "@/views/app-views/Landing/SectionTitle.tsx";
+import LandingFeatureCard from "@/views/app-views/Landing/LandingFeatureCard.tsx";
 
 export default function LandingPage() {
   return (
@@ -20,6 +22,21 @@ export default function LandingPage() {
             </Typography.Text>
           </div>
         </div>
+        <SectionTitle title={'Features'}/>
+        <Row gutter={32}>
+          <Col xs={24} sm={24} md={12}>
+            <LandingFeatureCard/>
+          </Col>
+          <Col xs={24} sm={24} md={12}>
+            <LandingFeatureCard/>
+          </Col>
+          <Col xs={24} sm={24} md={12}>
+            <LandingFeatureCard/>
+          </Col>
+          <Col xs={24} sm={24} md={12}>
+            <LandingFeatureCard/>
+          </Col>
+        </Row>
       </Container>
     </div>
   )
