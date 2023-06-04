@@ -2,7 +2,8 @@ import styles from './landing.module.css';
 import {Button, Col, Row, Typography} from "antd";
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
-import Figure from '@/assets/images/frame1.png';
+import Figure from '@/assets/images/wallet-figure-01.png';
+import Figure1 from '@/assets/images/tokens-card-01.png';
 
 export default function LandingHero() {
   return <div className={styles.hero}>
@@ -26,7 +27,8 @@ export default function LandingHero() {
       </Col>
       <Col xs={24} sm={24} md={12}>
         <div className={styles.figure}>
-          <img src={Figure} alt="figure"/>
+          <img src={Figure} alt="figure" className={styles.figure1}/>
+          <img src={Figure1} alt="figure" className={styles.figure2}/>
         </div>
       </Col>
     </Row>

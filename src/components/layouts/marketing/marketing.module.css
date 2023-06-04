@@ -47,6 +47,10 @@
   background-color: white;
 }
 
+.mobileActions {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .links {
     display: none;

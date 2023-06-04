@@ -2,7 +2,12 @@ import React, {useState} from "react";
 import styles from "./marketing.module.css";
 import {Button, Divider, Drawer, Dropdown, List, Menu, Space, theme, Typography} from "antd";
 import Container from "@/components/common/Container.tsx";
-import {HomeOutlined, InfoOutlined, MenuOutlined, QuestionOutlined, WalletOutlined} from "@ant-design/icons";
+import {
+  HomeFilled,
+  InfoCircleFilled,
+  MenuOutlined, QuestionCircleFilled,
+  WalletOutlined
+} from "@ant-design/icons";
 import {Link, useNavigate} from "react-router-dom";
 
 interface MarketingNavBarProps {
@@ -11,15 +16,9 @@ interface MarketingNavBarProps {
 
 export default function MarketingNavBar(props: MarketingNavBarProps) {
   const [drawerOpened, setDrawerOpened] = useState(false);
-  const {
-    token: {
-      colorBgMask
-    }
-  } = theme.useToken();
   const navigate = useNavigate();
 
   return <div className={styles.marketingNavbar}>
-
     <Drawer
       headerStyle={{display: 'none'}}
       placement="right" open={drawerOpened}
@@ -39,7 +38,7 @@ export default function MarketingNavBar(props: MarketingNavBarProps) {
           items={[{
             key: 'home',
             label: 'Home',
-            icon: <HomeOutlined/>,
+            icon: <HomeFilled/>,
             onClick: () => {
               setDrawerOpened(false);
               navigate('/');
@@ -47,7 +46,7 @@ export default function MarketingNavBar(props: MarketingNavBarProps) {
           }, {
             key: 'about',
             label: 'About',
-            icon: <InfoOutlined/>,
+            icon: <InfoCircleFilled/>,
             onClick: () => {
               setDrawerOpened(false);
               navigate('/about');
@@ -55,7 +54,7 @@ export default function MarketingNavBar(props: MarketingNavBarProps) {
           }, {
             key: 'faqs',
             label: 'FAQs',
-            icon: <QuestionOutlined/>,
+            icon: <QuestionCircleFilled/>,
             onClick: () => {
               setDrawerOpened(false);
               navigate('/faqs');
