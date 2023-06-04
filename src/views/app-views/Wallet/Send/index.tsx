@@ -26,7 +26,7 @@ export default function SendPage() {
       return t;
     })]);
 
-    let promises = [];
+    let promises: Promise<any>[] = [];
 
     for (let tx of transactions) {
       promises.push(new Promise(_ => {
