@@ -36,3 +36,32 @@
   justify-content: space-between;
   padding-bottom: 32px;
 }
+
+.menuItem {
+  padding: 16px 0;
+}
+
+.menuItemIcon {
+  width: 32px;
+  height: 32px;
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .links {
+    display: none;
+  }
+
+  .actions {
+    display: none;
+  }
+
+  .mobileActions {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .networkSelector {
+    display: none;
+  }
+}
