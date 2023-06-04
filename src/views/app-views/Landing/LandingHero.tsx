@@ -1,12 +1,12 @@
-import React from "react";
 import styles from './landing.module.css';
 import {Button, Col, Row, Typography} from "antd";
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
+import Figure from '@/assets/images/frame.png';
 
 export default function LandingHero() {
   return <div className={styles.hero}>
-    <Row>
+    <Row gutter={[24, 24]}>
       <Col xs={24} sm={24} md={12}>
         <div className={styles.heroTitlePromo}>
           <Typography.Text className={styles.heroTitle}>
@@ -23,9 +23,9 @@ export default function LandingHero() {
         </Link>
       </Col>
       <Col xs={24} sm={24} md={12}>
-        <>
-          Figure be here
-        </>
+        <div className={styles.figure}>
+          <img src={Figure} alt="figure"/>
+        </div>
       </Col>
     </Row>
   </div>

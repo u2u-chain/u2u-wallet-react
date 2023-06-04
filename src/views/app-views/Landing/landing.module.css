@@ -91,3 +91,27 @@
     font-size: 18px;
     color: #ffffff68;
 }
+
+.figure {
+    width: max-content;
+    height: max-content;
+    margin: 0 auto;
+}
+
+.figure img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    object-fit: cover;
+    animation: slideUpDown 2s infinite alternate;
+}
+
+@keyframes slideUpDown {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
