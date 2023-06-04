@@ -105,8 +105,10 @@
 }
 
 .figure1 {
+    position: absolute;
+    left: 0; top: 0;
     width: 60%;
-    z-index: 2;
+    z-index: 3;
 }
 
 .figure2 {
