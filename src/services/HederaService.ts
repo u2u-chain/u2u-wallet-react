@@ -1,7 +1,9 @@
 import {AccountBalanceQuery, AccountId, Client, Hbar, TransferTransaction} from "@hashgraph/sdk";
+import axios from "axios";
 
 class HederaService {
   client = Client.forTestnet();
+  scanApiBaseUrl = import.meta.env.VITE_APP_SCAN_API_BASE  || 'https://testnet.mirrornode.hedera.com/api/v1';
   constructor() {
     const nodeAddress = import.meta.env.NODE_ADDRESS;
     const nodeAccountId = import.meta.env.NODE_ACCOUNT_ID;
@@ -30,6 +32,16 @@ class HederaService {
       transaction,
       receipt,
     }
+  }
+
+  async getTransactionsHistory(accountId: string) {
+    return axios({
+      url: `${this.scanApiBaseUrl}/transactions`,
+      params: {
+        'account.id': accountId,
+        order: 'desc'
+      }
+    })
   }
 }
 
