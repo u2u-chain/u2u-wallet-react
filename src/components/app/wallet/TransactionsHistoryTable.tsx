@@ -3,7 +3,7 @@ import {Button, Divider, Table, Tooltip} from "antd";
 import {useAppSelector} from "@/redux/store.ts";
 import HederaService from "@/services/HederaService.ts";
 import moment from "moment";
-import {LoadingOutlined} from "@ant-design/icons";
+import {CheckOutlined, LoadingOutlined, WarningOutlined} from "@ant-design/icons";
 
 export default function TransactionsHistoryTable() {
   const {networkAccountId} = useAppSelector(state => state.auth);
@@ -21,6 +21,7 @@ export default function TransactionsHistoryTable() {
   const loadData = (nextLink?: string) => {
     setLoading(true);
     HederaService.getTransactionsHistory(networkAccountId, nextLink).then(response => {
+      console.log(response.data.transactions);
       setTransactions(txs => [...txs, ...response.data.transactions]);
       if (response.data && response.data.links && response.data.links.next) {
         setHasNext(true);
@@ -32,7 +33,7 @@ export default function TransactionsHistoryTable() {
 
   return <>
     <Table
-      rowKey={'transaction_id'}
+      rowKey={'transaction_hash'}
       dataSource={transactions}
       pagination={false}
       columns={[{
@@ -58,9 +59,23 @@ export default function TransactionsHistoryTable() {
           </>
         }
       }, {
+        key: 'recipient',
+        title: 'Recipient',
+        render: (item) => {
+          const mainTransaction = item.transfers[item.transfers.length - 2];
+          return <>
+            {mainTransaction.account}
+          </>
+        }
+      }, {
         key: 'result',
         title: 'Result',
-        dataIndex: 'result'
+        dataIndex: 'result',
+        render: (item) => {
+          return <Tooltip title={item}>
+            {item === 'SUCCESS' ? <CheckOutlined style={{color: 'green'}}/> : <WarningOutlined style={{color: 'red'}}/>}
+          </Tooltip>
+        }
       }]}
     />
     {hasNext && (

@@ -1,11 +1,13 @@
-import {Card, Empty} from "antd";
+import {Card, Col, Empty, Row} from "antd";
 import TransactionsHistoryTable from "@/components/app/wallet/TransactionsHistoryTable.tsx";
 
 export default function HistoryPage() {
 
   return (
-    <>
-      <TransactionsHistoryTable/>
-    </>
+    <Row>
+      <Col xs={24} sm={24} md={24} lg={24} xl={14}>
+        <TransactionsHistoryTable/>
+      </Col>
+    </Row>
   )
 }
