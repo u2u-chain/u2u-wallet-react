@@ -17,6 +17,12 @@ import TokensHistoryPage from "@/views/app-views/History/TokensHistory";
 import AccountHistoryPage from "@/views/app-views/History/AccountHistory";
 import ToolsPage from "@/views/app-views/Tools";
 import SendPage from "@/views/app-views/Wallet/Send";
+import AssociateToken from "@/views/app-views/Tools/AssociateToken";
+import CreateAccount from "@/views/app-views/Tools/CreateAccount";
+import Download from "@/views/app-views/Tools/Download";
+import ConvertUnits from "@/views/app-views/Tools/ConvertUnits";
+import ExportKeystore from "@/views/app-views/Tools/ExportKeystore";
+import UploadFile from "@/views/app-views/Tools/Upload";
 
 export default function AppViews() {
   return (
@@ -86,6 +92,30 @@ export default function AppViews() {
             <Route
               index
               element={<ToolsPage />}
+            />
+            <Route
+              path={"associate-token"}
+              element={<AssociateToken />}
+            />
+            <Route
+              path={"create-account"}
+              element={<CreateAccount />}
+            />
+            <Route
+              path={"upload"}
+              element={<UploadFile />}
+            />
+            <Route
+              path={"download"}
+              element={<Download />}
+            />
+            <Route
+              path={"convert-units"}
+              element={<ConvertUnits />}
+            />
+            <Route
+              path={"export-keystore"}
+              element={<ExportKeystore />}
             />
           </Route>
         </Route>
