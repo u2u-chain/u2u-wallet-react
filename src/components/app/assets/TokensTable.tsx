@@ -48,7 +48,7 @@ export default function TokensTable() {
       key: 'amount',
       render: (text) => {
         const [integerPart, decimalPart] = text.toString().split(".");
-        const decimalPartBlur = decimalPart.substring(0, 2);
+        const decimalPartBlur = decimalPart?.substring(0, 2);
 
         let formattedIntegerPart = integerPart;
         if (parseInt(integerPart) >= 1000) {
@@ -59,7 +59,7 @@ export default function TokensTable() {
           <span>
           {formattedIntegerPart}.
           <span>{decimalPartBlur}</span>
-          <span style={{opacity: 0.5}}>{decimalPart.substring(2)}</span>
+          <span style={{opacity: 0.5}}>{decimalPart?.substring(2)}</span>
         </span>
         );
       }
