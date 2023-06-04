@@ -1,11 +1,12 @@
 import {Card, Empty} from "antd";
+import TransactionsHistoryTable from "@/components/app/wallet/TransactionsHistoryTable.tsx";
 
 export default function HistoryPage() {
 
   return (
     <>
       <Card>
-        <Empty description={'No transactions found on the explorer.'} />
+        <TransactionsHistoryTable/>
       </Card>
     </>
   )
