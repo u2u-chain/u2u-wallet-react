@@ -100,7 +100,6 @@
 .figure {
     position: relative;
     width: 100%;
-    animation: slideUpDown 2s infinite alternate;
     min-height: 360px;
 }
 
@@ -109,6 +108,7 @@
     left: 0; top: 0;
     width: 60%;
     z-index: 3;
+    animation: slideUpDown 1.5s infinite alternate;
 }
 
 .figure2 {
@@ -117,6 +117,7 @@
     z-index: 1;
     right: 0;
     top: 80px;
+    animation: slideUpDown 2s infinite alternate;
 }
 
 @keyframes slideUpDown {
