@@ -24,6 +24,7 @@ import ConvertUnits from "@/views/app-views/Tools/ConvertUnits";
 import ExportKeystore from "@/views/app-views/Tools/ExportKeystore";
 import UploadFile from "@/views/app-views/Tools/Upload";
 import TransactionsPage from "@/views/app-views/Transactions";
+import KeysPage from "@/views/app-views/Keys";
 
 export default function AppViews() {
   return (
@@ -96,6 +97,10 @@ export default function AppViews() {
               element={<AccountHistoryPage/>}
             />
           </Route>
+          <Route
+            path={'keys'}
+            element={<KeysPage />}
+          />
           <Route path={"tools"}>
             <Route
               index
