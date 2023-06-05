@@ -9,6 +9,18 @@
   flex: 1;
 }
 
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 24px;
+}
+
+.logo {
+  display: none;
+  height: 40px;
+}
+
 .authSection {
   width: 100%;
   max-width: 500px;
@@ -27,6 +39,9 @@
 
 
 @media (max-width: 1200px) {
+  .logo {
+    display: block;
+  }
   .authOuter {
     align-items: center;
     justify-content: center;
