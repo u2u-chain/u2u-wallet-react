@@ -1,3 +1,19 @@
 .loginForm {
   margin-top: 48px;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .title {
+    text-align: center;
+  }
+  .description {
+    width: 100%;
+    text-align: center;
+  }
+
+  .submitBtn {
+    width: 100%;
+    margin-top: 32px;
+  }
 }
