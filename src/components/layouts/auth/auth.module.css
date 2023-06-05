@@ -24,3 +24,13 @@
   padding: 48px;
   align-items: center;
 }
+
+
+@media (max-width: 768px) {
+  .authSection {
+    padding: 16px;
+  }
+  .authForm {
+    padding: 32px;
+  }
+}

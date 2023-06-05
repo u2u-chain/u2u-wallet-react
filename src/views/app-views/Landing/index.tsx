@@ -16,10 +16,7 @@ export default function LandingPage() {
             POWERED BY AMAZING TECHNOLOGY
           </Typography.Text>
           <div className={styles.technology}>
-            <img src={'https://s2.coinmarketcap.com/static/img/coins/64x64/4642.png'} alt={'Hedera'} className={styles.technologyIcon}/>
-            <Typography.Text className={styles.technologyName}>
-              Hedera Hashgraph
-            </Typography.Text>
+            <img src={'https://uniultra.xyz/uploads/logo-U2U.png'} alt={'Hedera'} className={styles.technologyIcon}/>
           </div>
         </div>
         <SectionTitle title={'Features'}/>
