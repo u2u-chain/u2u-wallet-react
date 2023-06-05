@@ -1,13 +1,15 @@
 import {useEffect} from "react";
-import {Card, Col, Row, Space, Tooltip} from "antd";
+import {Button, Card, Col, Row, Space, Tooltip, Typography} from "antd";
 import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
 import {loadAccountBalance, loadPrice} from "@/redux/actions/app.actions.ts";
-import {RedoOutlined, SendOutlined, WalletOutlined} from "@ant-design/icons";
 import styles from './wallet.module.css';
 import {Link} from "react-router-dom";
 import TokensTable from "@/components/app/assets/TokensTable";
 import Collectibles from "@/components/app/assets/Collectibles";
 import CurrencyWrapper from "@/components/app/wallet/CurrencyWrapper.tsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMoneyBillTransfer, faRefresh, faSend, faWallet} from "@fortawesome/pro-solid-svg-icons";
+import IconCard from "@/components/common/IconCard";
 
 
 export default function WalletPage() {
@@ -28,34 +30,55 @@ export default function WalletPage() {
 
   return (
     <>
-      <Card style={{marginBottom: 16}}>
-        <p className={styles.title}>
-          Hey there, <strong>{networkAccountId}</strong>
-        </p>
-        <div className={styles.wrapper}>
-          <div>
-            <div className={styles.text}>
-              Total value ({balance})
-            </div>
-            <div className={styles.value}>
-              <Space>
-                <WalletOutlined/>
+      <Row gutter={16}>
+        <Col xs={24} sm={24} md={12}>
+          <IconCard
+            style={{marginBottom: 16}}
+            icon={faWallet}
+          >
+            <p className={styles.title}>
+              Hey there, <strong>{networkAccountId}</strong>
+            </p>
+            <div className={styles.wrapper}>
+              <div className={styles.value}>
                 <div style={{color: "#00b96b", fontWeight: 700}}>
                   <CurrencyWrapper>
                     {calculatedPrice}
                   </CurrencyWrapper>
                 </div>
-                <a onClick={reloadPrice}><RedoOutlined/></a>
-              </Space>
+                <Button onClick={reloadPrice} type={'text'}>
+                  <FontAwesomeIcon icon={faRefresh} fontSize={14}/>
+                </Button>
+              </div>
             </div>
-          </div>
-          <Tooltip title={"Send"} placement="bottom">
-            <a className={styles.icon} href={'/wallet/send'}>
-              <SendOutlined/>
-            </a>
-          </Tooltip>
-        </div>
-      </Card>
+          </IconCard>
+        </Col>
+        <Col xs={24} sm={24} md={12} style={{display: 'flex'}}>
+          <IconCard
+            style={{marginBottom: 16, width: '100%', display: 'flex'}}
+            bodyStyle={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}
+            contentStyle={{display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}
+            icon={faMoneyBillTransfer}
+          >
+            <Typography.Text className={styles.title}>
+              Transfer
+            </Typography.Text>
+            <Typography.Text className={styles.description}>
+              Send U2U to your buddies...
+            </Typography.Text>
+            <div className={styles.wrapper}>
+              <Link to={'/wallet/send'}>
+                <Button
+                  type={'primary'} shape={'round'}
+                  icon={<FontAwesomeIcon icon={faSend}/>}
+                >
+                  Send U2U
+                </Button>
+              </Link>
+            </div>
+          </IconCard>
+        </Col>
+      </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
           <Card title={'Assets'} extra={<Link to={'/wallet/assets/tokens'}>View all</Link>}>
