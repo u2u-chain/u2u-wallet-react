@@ -4,7 +4,7 @@ import {Card} from "antd";
 
 export default function CollectiblesPage() {
   return (
-    <Card title={'Collectibles'}>
+    <Card bordered={false} title={'Collectibles'}>
       <Collectibles />
     </Card>
   )

@@ -4,7 +4,7 @@ import {Button, Card, Col, Row, Typography, Upload} from "antd";
 export default function UploadFile() {
   return (
     <>
-      <Card>
+      <Card bordered={false}>
         <div className={styles.pageTitle}>
           Upload
         </div>
@@ -15,7 +15,7 @@ export default function UploadFile() {
       <div style={{marginTop: 16}}>
         <Row>
           <Col xs={24} sm={24} md={24} lg={16}>
-            <Card title={"Upload"}>
+            <Card bordered={false} title={"Upload"}>
               <Upload.Dragger>
                 <p className="ant-upload-text">Drop your files here</p>
                 <p className="ant-upload-text">or</p>

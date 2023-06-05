@@ -4,7 +4,7 @@ import ClickableCard from "@/components/app/tools/ClickableCard";
 
 export default function ToolsPage() {
   return (
-    <Card title={'Tools'} extra={<Input.Search placeholder="Search tools" style={{ width: '100%' }} />}>
+    <Card bordered={false} title={'Tools'} extra={<Input.Search placeholder="Search tools" style={{ width: '100%' }} />}>
       <Row gutter={[16, 16]}>
         {
           TOOlS_LIST.map((tool) => {

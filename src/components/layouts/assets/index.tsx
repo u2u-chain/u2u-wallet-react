@@ -10,7 +10,7 @@ export default function AssetsLayout() {
 
   return (
     <>
-      <Card className={styles.pageHeaderCard}>
+      <Card bordered={false} className={styles.pageHeaderCard}>
         <div className={styles.pageTitle}>
           Assets
         </div>

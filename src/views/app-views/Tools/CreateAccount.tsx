@@ -9,7 +9,7 @@ export default function CreateAccount() {
 
   return (
     <>
-      <Card>
+      <Card bordered={false}>
         <div className={styles.pageTitle}>
           Create Account
         </div>
@@ -20,7 +20,7 @@ export default function CreateAccount() {
       <div style={{marginTop: 16}}>
         <Row>
           <Col xs={24} sm={24} md={24} lg={16}>
-            <Card title={'Create Account'}>
+            <Card bordered={false} title={'Create Account'}>
               <Form
                 layout={"vertical"}
                 onFinish={onFinish}

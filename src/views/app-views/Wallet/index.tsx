@@ -81,12 +81,12 @@ export default function WalletPage() {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
-          <Card title={'Assets'} extra={<Link to={'/wallet/assets/tokens'}>View all</Link>}>
+          <Card bordered={false} title={'Assets'} extra={<Link to={'/wallet/assets/tokens'}>View all</Link>}>
             <TokensTable/>
           </Card>
         </Col>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
-          <Card title={'Collectibles'} extra={<Link to={'/wallet/assets/collectibles'}>View all</Link>}>
+          <Card bordered={false} title={'Collectibles'} extra={<Link to={'/wallet/assets/collectibles'}>View all</Link>}>
             <Collectibles/>
           </Card>
         </Col>

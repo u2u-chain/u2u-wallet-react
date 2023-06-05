@@ -2,7 +2,7 @@ import {Card, Empty} from "antd";
 
 export default function AccountHistoryPage() {
   return (
-    <Card>
+    <Card bordered={false}>
       <Empty description={'No transactions found on the explorer.'} />
     </Card>
   )

@@ -5,7 +5,7 @@ import {Card, Input} from "antd";
 export default function TokensPage() {
   return (
     <>
-      <Card title={'Tokens'} extra={<Input.Search placeholder="Search tokens" style={{ width: '100%' }} />}>
+      <Card bordered={false} title={'Tokens'} extra={<Input.Search placeholder="Search tokens" style={{ width: '100%' }} />}>
         <TokensTable />
       </Card>
     </>

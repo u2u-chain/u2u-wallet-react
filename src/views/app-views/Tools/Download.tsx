@@ -9,7 +9,7 @@ export default function Download() {
 
   return (
     <>
-      <Card>
+      <Card bordered={false}>
         <div className={styles.pageTitle}>
           Download
         </div>
@@ -20,7 +20,7 @@ export default function Download() {
       <div style={{marginTop: 16}}>
         <Row>
           <Col xs={24} sm={24} md={24} lg={16}>
-            <Card title={'Download'}>
+            <Card bordered={false} title={'Download'}>
               <Form
                 layout={"vertical"}
                 onFinish={onFinish}

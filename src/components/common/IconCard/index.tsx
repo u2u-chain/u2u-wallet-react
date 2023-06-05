@@ -14,6 +14,7 @@ interface IconCardProps {
 
 export default function IconCard({icon, children, style, bodyStyle, contentStyle}: IconCardProps) {
   return <Card
+    bordered={false}
     className={styles.card}
     style={{...style}}
     bodyStyle={{...bodyStyle}}

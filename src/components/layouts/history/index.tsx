@@ -8,7 +8,7 @@ export default function HistoryLayout() {
 
   return (
     <>
-      <Card className={styles.pageHeaderCard}>
+      <Card bordered={false} className={styles.pageHeaderCard}>
         <div className={styles.pageTitle}>
           History
         </div>
