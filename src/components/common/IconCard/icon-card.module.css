@@ -1,0 +1,26 @@
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.icon {
+  position: absolute;
+  font-size: 120px;
+  right: 0;
+  top: -46px;
+  transform: rotate(-15deg);
+  opacity: .1;
+  z-index: 0;
+  transition: all 400ms;
+}
+
+.card:hover .icon {
+  transform: rotate(0deg);
+  top: -12px;
+  right: 8px;
+}
+
+.content {
+  z-index: 1;
+  position: relative;
+}
