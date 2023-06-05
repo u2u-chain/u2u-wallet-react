@@ -20,13 +20,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <Typography.Title level={2}>
+    <div style={{width: '100%'}}>
+      <Typography.Title level={2} className={styles.title}>
         Sign In
       </Typography.Title>
-      <Typography.Text>
+      <Typography.Paragraph className={styles.description}>
         Sign in to access your U2U Wallet & digital assets...
-      </Typography.Text>
+      </Typography.Paragraph>
       <Form
         form={form}
         className={styles.loginForm}
@@ -53,6 +53,7 @@ export default function LoginPage() {
             type={'primary'}
             shape={'round'}
             htmlType={'submit'}
+            className={styles.submitBtn}
           >
             Sign In
           </Button>

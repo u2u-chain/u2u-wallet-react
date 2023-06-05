@@ -24,3 +24,21 @@
   padding: 48px;
   align-items: center;
 }
+
+
+@media (max-width: 1200px) {
+  .authOuter {
+    align-items: center;
+    justify-content: center;
+  }
+  .authFigure {
+    display: none;
+  }
+  .authSection {
+    padding: 16px;
+    display: block;
+  }
+  .authForm {
+    padding: 32px;
+  }
+}

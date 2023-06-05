@@ -9,6 +9,8 @@ import {
   WalletOutlined
 } from "@ant-design/icons";
 import {Link, useNavigate} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars, faWallet} from "@fortawesome/pro-solid-svg-icons";
 
 interface MarketingNavBarProps {
 
@@ -130,10 +132,10 @@ export default function MarketingNavBar(props: MarketingNavBarProps) {
         <div className={styles.mobileActions}>
           <Space>
             <Button type={'text'} href={'/auth/login'}>
-              <WalletOutlined/>
+              <FontAwesomeIcon icon={faWallet}/>
             </Button>
             <Button type={'text'} onClick={() => setDrawerOpened(true)}>
-              <MenuOutlined/>
+              <FontAwesomeIcon icon={faBars}/>
             </Button>
           </Space>
         </div>

@@ -5,6 +5,8 @@ import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
 import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
 import {doSignOut} from "@/redux/actions/auth.actions.ts";
 import {setCurrency} from "@/redux/slices/appSlice.ts";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars} from "@fortawesome/pro-solid-svg-icons";
 
 interface WalletHeaderProps {
   collapsed: boolean,
@@ -20,7 +22,7 @@ export default function WalletHeader({collapsed, toggleCollapsed}: WalletHeaderP
       <Button
         type={'text'}
         size={'large'}
-        icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
+        icon={<FontAwesomeIcon icon={faBars}/>}
         onClick={toggleCollapsed}
       />
       <Space size={'large'}>
