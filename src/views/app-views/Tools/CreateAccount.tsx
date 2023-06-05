@@ -1,5 +1,6 @@
 import styles from "@/styles/Setting.module.css";
 import {Button, Card, Col, Form, Input, Row, Typography} from "antd";
+import ToolsLayout from "@/components/layouts/tools";
 
 export default function CreateAccount() {
 
@@ -18,32 +19,30 @@ export default function CreateAccount() {
         </Typography.Paragraph>
       </Card>
       <div style={{marginTop: 16}}>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={16}>
-            <Card bordered={false} title={'Create Account'}>
-              <Form
-                layout={"vertical"}
-                onFinish={onFinish}
+        <ToolsLayout>
+          <Card bordered={false} title={'Create Account'}>
+            <Form
+              layout={"vertical"}
+              onFinish={onFinish}
+            >
+              <Form.Item
+                label="Public Key"
+                name="publicKey"
               >
-                <Form.Item
-                  label="Public Key"
-                  name="publicKey"
+                <Input placeholder={'302e020100300...'} />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type={"primary"}
+                  htmlType={"submit"}
+                  block
                 >
-                  <Input placeholder={'302e020100300...'} />
-                </Form.Item>
-                <Form.Item>
-                  <Button
-                    type={"primary"}
-                    htmlType={"submit"}
-                    block
-                  >
-                    Create Account
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Card>
-          </Col>
-        </Row>
+                  Create Account
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
+        </ToolsLayout>
       </div>
     </>
   )

@@ -2,6 +2,7 @@ import styles from "@/styles/Setting.module.css";
 import {Button, Card, Col, Divider, Form, Input, List, Row, Typography} from "antd";
 import {useState} from "react";
 import {DeleteOutlined} from "@ant-design/icons";
+import ToolsLayout from "@/components/layouts/tools";
 
 export default function AssociateToken() {
   const [tokens, setTokens] = useState<string[]>([]);
@@ -29,70 +30,68 @@ export default function AssociateToken() {
         </Typography.Paragraph>
       </Card>
       <div style={{marginTop: 16}}>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={16}>
-            <Card bordered={false} title={'Create Account'}>
-              <Form
-                form={form}
-                layout={"vertical"}
-                onFinish={onFinish}
+        <ToolsLayout>
+          <Card bordered={false} title={'Create Account'}>
+            <Form
+              form={form}
+              layout={"vertical"}
+              onFinish={onFinish}
+            >
+              <Form.Item
+                label="Token ID"
+                name="tokenId"
               >
-                <Form.Item
-                  label="Token ID"
-                  name="tokenId"
+                <Input placeholder={'Shard.Realm.Num'} />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type={"primary"}
+                  htmlType={"submit"}
+                  block
                 >
-                  <Input placeholder={'Shard.Realm.Num'} />
-                </Form.Item>
-                <Form.Item>
-                  <Button
-                    type={"primary"}
-                    htmlType={"submit"}
-                    block
-                  >
-                    Add Token
-                  </Button>
-                </Form.Item>
-              </Form>
-              <Divider />
-              <List
-                dataSource={tokens}
-                renderItem={item => (
-                  <Row>
-                    <Col span={20}>
-                      {item}
-                    </Col>
-                    <Col span={4}>
-                      <Button type={'text'} danger onClick={() => handleDelete(item)}>
-                        <DeleteOutlined/>
-                      </Button>
-                    </Col>
-                  </Row>
-                )}
-              />
-              {tokens.length > 0 &&
-                <div style={{marginTop: 16}}>
-									<Row gutter={[16, 16]}>
-										<Col xs={24} sm={24} md={24} lg={12}>
-											<Button
-												block
-											>
-												Cancel
-											</Button>
-										</Col>
-										<Col xs={24} sm={24} md={24} lg={12}>
-											<Button
-												type={"primary"}
-												block
-											>
-												Associate Tokens
-											</Button>
-										</Col>
-									</Row>
-                </div>
-              }
-            </Card>
-          </Col>
-        </Row>
+                  Add Token
+                </Button>
+              </Form.Item>
+            </Form>
+            <Divider />
+            <List
+              dataSource={tokens}
+              renderItem={item => (
+                <Row>
+                  <Col span={20}>
+                    {item}
+                  </Col>
+                  <Col span={4}>
+                    <Button type={'text'} danger onClick={() => handleDelete(item)}>
+                      <DeleteOutlined/>
+                    </Button>
+                  </Col>
+                </Row>
+              )}
+            />
+            {tokens.length > 0 &&
+              <div style={{marginTop: 16}}>
+                <Row gutter={[16, 16]}>
+                  <Col xs={24} sm={24} md={24} lg={12}>
+                    <Button
+                      block
+                    >
+                      Cancel
+                    </Button>
+                  </Col>
+                  <Col xs={24} sm={24} md={24} lg={12}>
+                    <Button
+                      type={"primary"}
+                      block
+                    >
+                      Associate Tokens
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
+            }
+          </Card>
+        </ToolsLayout>
       </div>
     </>
   )

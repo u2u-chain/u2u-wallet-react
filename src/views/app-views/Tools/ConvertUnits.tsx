@@ -2,6 +2,7 @@ import styles from "@/styles/Setting.module.css";
 import {Card, Col, Divider, Form, Input, Row, Select, Table, Typography} from "antd";
 import type { ColumnsType } from 'antd/es/table';
 import {SwapOutlined} from "@ant-design/icons";
+import ToolsLayout from "@/components/layouts/tools";
 
 interface DataType {
   key: string;
@@ -157,36 +158,34 @@ export default function ConvertUnits() {
         </Typography.Paragraph>
       </Card>
       <div style={{marginTop: 16}}>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={16}>
-            <Card bordered={false} title={'Convert Units'}>
-              <Form
-                form={form}
-                layout={"vertical"}
-              >
-                <Row gutter={[16, 16]}>
-                  <Col xs={24} sm={24} md={10}>
-                    <Form.Item name={"preInput"} style={{margin: 0}}>
-                      <Input addonBefore={prefixSelector} style={{width: "100%"}} />
-                    </Form.Item>
-                  </Col>
-                  <Col xs={24} sm={24} md={4}>
-                    <div style={{fontSize: 20, display: "flex", alignItems: "center", justifyContent: "center", height: "100%"}}>
-                      <SwapOutlined />
-                    </div>
-                  </Col>
-                  <Col xs={24} sm={24} md={10}>
-                    <Form.Item style={{margin: 0}}>
-                        <Input addonBefore={prefixSelector} />
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Form>
-              <Divider />
-              <Table columns={columns} dataSource={data} pagination={false} />
-            </Card>
-          </Col>
-        </Row>
+        <ToolsLayout>
+          <Card bordered={false} title={'Convert Units'}>
+            <Form
+              form={form}
+              layout={"vertical"}
+            >
+              <Row gutter={[16, 16]}>
+                <Col xs={24} sm={24} md={10}>
+                  <Form.Item name={"preInput"} style={{margin: 0}}>
+                    <Input addonBefore={prefixSelector} style={{width: "100%"}} />
+                  </Form.Item>
+                </Col>
+                <Col xs={24} sm={24} md={4}>
+                  <div style={{fontSize: 20, display: "flex", alignItems: "center", justifyContent: "center", height: "100%"}}>
+                    <SwapOutlined />
+                  </div>
+                </Col>
+                <Col xs={24} sm={24} md={10}>
+                  <Form.Item style={{margin: 0}}>
+                    <Input addonBefore={prefixSelector} />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+            <Divider />
+            <Table columns={columns} dataSource={data} pagination={false} />
+          </Card>
+        </ToolsLayout>
       </div>
     </>
   )
