@@ -5,12 +5,12 @@ import Container from "@/components/common/Container.tsx";
 import {
   HomeFilled,
   InfoCircleFilled,
-  MenuOutlined, QuestionCircleFilled,
-  WalletOutlined
+  QuestionCircleFilled,
 } from "@ant-design/icons";
 import {Link, useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faWallet} from "@fortawesome/pro-solid-svg-icons";
+import LogoWhite from "@/assets/logo_white.png";
 
 interface MarketingNavBarProps {
 
@@ -29,9 +29,7 @@ export default function MarketingNavBar(props: MarketingNavBarProps) {
     >
       <div>
         <div style={{padding: '24px 0 0 24px'}}>
-          <Typography.Text className={styles.logoText}>
-            U2U Wallet
-          </Typography.Text>
+          <img src={LogoWhite} alt={"U2U Wallet"} className={styles.logoImage}/>
         </div>
         <Divider/>
         <Menu
@@ -86,10 +84,8 @@ export default function MarketingNavBar(props: MarketingNavBarProps) {
     <Container>
       <div className={styles.marketingNavbarInner}>
         <div className={styles.logo}>
-          <Typography.Text className={styles.logoText}>
-            U2U Wallet
-          </Typography.Text>
-
+          <img src={LogoWhite} alt={"U2U Wallet"} className={styles.logoImage}/>
+          <Divider type={'vertical'}/>
           <Dropdown menu={{
             items: [{
               key: 0,

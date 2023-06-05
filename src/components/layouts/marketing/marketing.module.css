@@ -1,3 +1,7 @@
+.logoImage {
+  height: 40px;
+}
+
 .marketingWrapper {
   background: rgb(0,34,3);
   background: linear-gradient(143deg, rgb(0, 28, 3) 0%, rgba(0,3,0,1) 46%, rgba(0,0,0,1) 100%);
