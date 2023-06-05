@@ -5,6 +5,7 @@ import ApiService from "@/services/ApiService.ts";
 import {Link} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
 import {doSignIn} from "@/redux/actions/auth.actions.ts";
+import LogoWhite from "@/assets/logo_white.png";
 
 export default function LoginPage() {
   const [form] = Form.useForm();
@@ -20,7 +21,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{width: '100%'}}>
+    <div style={{width: '100%', display: 'flex', flexDirection: 'column'}}>
+      <img src={LogoWhite} alt={'u2u wallet'} className={styles.logo}/>
       <Typography.Title level={2} className={styles.title}>
         Sign In
       </Typography.Title>

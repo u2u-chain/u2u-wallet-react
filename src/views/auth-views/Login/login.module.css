@@ -3,10 +3,22 @@
   width: 100%;
 }
 
+.logo {
+  height: 36px;
+  align-self: flex-start;
+  margin-bottom: 64px;
+}
+
 @media (max-width: 1200px) {
+  .logo {
+    display: none;
+    align-self: center;
+  }
+
   .title {
     text-align: center;
   }
+
   .description {
     width: 100%;
     text-align: center;

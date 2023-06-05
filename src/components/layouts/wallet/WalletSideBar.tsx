@@ -3,6 +3,7 @@ import {Avatar, Button, theme, Typography} from "antd";
 import styles from './wallet-layout.module.css';
 import {useAppSelector} from "@/redux/store.ts";
 import {WalletMenuContent} from "@/components/layouts/wallet/WalletMenuContent.tsx";
+import LogoWhite from "@/assets/logo_white.png";
 
 export default function WalletSideBar({collapsed} : {collapsed: boolean}) {
   const {profile} = useAppSelector(state => state.app);
@@ -18,9 +19,7 @@ export default function WalletSideBar({collapsed} : {collapsed: boolean}) {
             <Typography.Text>
               U2U
             </Typography.Text>
-            : <Typography.Text>
-              U2U Wallet
-            </Typography.Text>
+            : <img src={LogoWhite} alt={"U2U Wallet"} className={styles.logo} />
         }
 
       </div>
