@@ -15,7 +15,7 @@ export default function KeysPage() {
           Keys
         </div>
         <Typography.Paragraph>
-          Review your transactions...
+          Get your private key and your public key...
         </Typography.Paragraph>
       </Card>
       <div style={{marginTop: 16}}>
