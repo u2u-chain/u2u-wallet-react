@@ -9,7 +9,7 @@ import {faArrowRight} from "@fortawesome/pro-solid-svg-icons";
 
 export default function LandingHero() {
   return <div className={styles.hero}>
-    <Row gutter={[24, 24]}>
+    <Row gutter={[24, 24]} style={{flex: 1}}>
       <Col xs={24} sm={24} md={12}>
         <div className={styles.heroContent}>
           <div className={styles.heroTitlePromo}>
