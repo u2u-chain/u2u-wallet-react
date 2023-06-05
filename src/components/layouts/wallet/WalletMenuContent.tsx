@@ -38,12 +38,19 @@ export const WalletMenuContent = () => {
   }} = theme.useToken();
   const location = useLocation();
   const navigate = useNavigate();
+  
+  const isActive = (key) => {
+    if (key === '/wallet') {
+      return location.pathname === key;
+    }
+    return location.pathname.startsWith(key);
+  };
 
   return (
     <Menu
       mode="inline"
       defaultSelectedKeys={['1']}
-      selectedKeys={[location.pathname]}
+      selectedKeys={[...routes.filter(route => isActive(route.key)).map(route => route.key)]}
       style={{ height: '100%', borderRight: 0, backgroundColor: colorBgContainer }}
       items={routes.map(route => ({
         key: route.key,

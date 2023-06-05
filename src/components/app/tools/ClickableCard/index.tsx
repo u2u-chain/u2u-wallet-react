@@ -24,7 +24,7 @@ export default function ClickableCard({name, description, link, icon}: Clickable
           {description}
         </div>
         <div className={styles.icon}>
-          <FontAwesomeIcon icon={icon}/>
+          <FontAwesomeIcon icon={icon} size={'3x'}/>
         </div>
       </Card>
     </div>
