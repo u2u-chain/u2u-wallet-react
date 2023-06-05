@@ -29,6 +29,30 @@ export default function TokensTable() {
 
   const columns: ColumnsType<DataType> = [
     {
+      title: "Token",
+      dataIndex: "token",
+      key: "token",
+      render: (_, record) => {
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: currencyCode,
+        });
+        const calculatedPrice = formatter.format(balance * currencyRate);
+        return(
+          <div style={{display: "flex", alignItems: "center"}}>
+            <img width={40} height={40} src={record.image} alt="image"/>
+            <div style={{display: "flex", flexDirection: "column", paddingLeft: 8}}>
+              <span style={{fontWeight: 500}}>{record.symbol}</span>
+              <CurrencyWrapper style={{paddingLeft: 8}}>
+                {calculatedPrice}
+              </CurrencyWrapper>
+            </div>
+          </div>
+        )
+      },
+      responsive: ["xs"]
+    },
+    {
       title: 'Token',
       dataIndex: 'token',
       key: 'token',
@@ -41,6 +65,7 @@ export default function TokensTable() {
           </div>
         )
       },
+      responsive: ["sm"]
     },
     {
       title: 'Amount',
@@ -80,7 +105,8 @@ export default function TokensTable() {
             {calculatedPrice}
           </CurrencyWrapper>
         );
-      }
+      },
+      responsive: ["sm"]
     },
 
 
