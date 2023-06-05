@@ -2,32 +2,34 @@ import React from "react";
 import {Menu, theme} from "antd";
 import {useLocation, useNavigate} from "react-router-dom";
 import {HistoryOutlined, HomeOutlined, KeyOutlined, ToolOutlined, WalletOutlined} from "@ant-design/icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHistory, faHome, faKey, faWallet, faWrench} from "@fortawesome/pro-solid-svg-icons";
 
 const routes = [{
   url: '/wallet',
   key: '/wallet',
   label: 'Home',
-  icon: <HomeOutlined/>,
+  icon: <FontAwesomeIcon icon={faHome}/>,
 }, {
   url: '/wallet/assets/tokens',
   key: '/wallet/assets/tokens',
   label: 'Assets',
-  icon: <WalletOutlined/>,
+  icon: <FontAwesomeIcon icon={faWallet}/>,
 }, {
   url: '/wallet/history',
   key: '/wallet/history',
   label: 'History',
-  icon: <HistoryOutlined/>,
+  icon: <FontAwesomeIcon icon={faHistory}/>,
 }, {
   url: '/wallet/keys',
   key: '/wallet/keys',
   label: 'Keys',
-  icon: <KeyOutlined/>,
+  icon: <FontAwesomeIcon icon={faKey}/>,
 }, {
   url: '/wallet/tools',
   key: '/wallet/tools',
   label: 'Tools',
-  icon: <ToolOutlined/>,
+  icon: <FontAwesomeIcon icon={faWrench}/>,
 }]
 
 export const WalletMenuContent = () => {

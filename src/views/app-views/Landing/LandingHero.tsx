@@ -1,9 +1,11 @@
 import styles from './landing.module.css';
-import {Button, Col, Row, Typography} from "antd";
+import {Button, Col, Row, Space, Typography} from "antd";
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import Figure from '@/assets/images/wallet-figure-01.png';
 import Figure1 from '@/assets/images/tokens-card-01.png';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRight} from "@fortawesome/pro-solid-svg-icons";
 
 export default function LandingHero() {
   return <div className={styles.hero}>
@@ -20,7 +22,12 @@ export default function LandingHero() {
           </div>
           <Link to={'/wallet'}>
             <Button shape={'round'} type={'primary'} size={'large'}>
-              Access Your Wallet <ArrowRightOutlined/>
+              <Space>
+                <>
+                  Access Your Wallet
+                </>
+                <FontAwesomeIcon icon={faArrowRight}/>
+              </Space>
             </Button>
           </Link>
         </div>
