@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import HederaService from "@/services/HederaService.ts";
-import {Alert, Button, Form, Input, message, Popconfirm, Popover, Space, Typography} from "antd";
+import {Alert, Button, Form, Input, message, Modal, Popover, Space, Typography} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faDownload, faEye, faFileExport, faInfoCircle, faLock} from "@fortawesome/pro-solid-svg-icons";
 import {downloadFile} from "@/utils/common.utils.ts";
@@ -11,30 +11,39 @@ import {useNavigate} from "react-router-dom";
 export default function RegisterWithMnemonic() {
   const [form] = Form.useForm();
   const [keys, setKeys] = useState<any>({})
-  const [showMnemonic, setShowMnemonic] = useState(true);
-  const [showKeys, setShowKeys] = useState(false);
   const [exportEncryptionPassword, setExportEncryptionPassword] = useState('');
   const [exporting, setExporting] = useState(false);
   const [showWarning, setShowWarning] = useState(true);
   const [creationLoading, setCreationLoading] = useState(false);
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+  const [mnemonic, setMnemonic] = useState('');
 
   const initialize = async () => {
     const generatedKeys = await HederaService.generateMnemonicPrivateKey();
     setKeys(generatedKeys);
-    form.setFieldsValue(generatedKeys);
+    setMnemonic(generatedKeys.mnemonic);
   };
 
   useEffect(() => {
     // Generate Mnemonic
     initialize().then(() => null);
   }, []);
+  
+  useEffect(() => {
+    console.log('mnemonic', mnemonic)
+  }, [mnemonic])
 
   const downloadMnemonic = () => {
     downloadFile('u2u-wallet-mnemonic.txt', keys.mnemonic);
-    setShowKeys(true);
-    setShowMnemonic(false);
+    ApiService.createAccountWithPublicKey(keys.publicKey).then((value) => {
+      form.setFieldsValue(value)
+    }).catch(e => {
+      setCreationLoading(false);
+      message.error('FAILED_TO_CRATE_ACCOUNT');
+    })
     setShowWarning(false);
+    setOpenModal(true);
   }
 
   const exportKeystore = async () => {
@@ -57,17 +66,6 @@ export default function RegisterWithMnemonic() {
     return navigator.clipboard.writeText(txt);
   }
 
-  const onFinishCreation = async () => {
-    setCreationLoading(true);
-    ApiService.createAccountWithPublicKey(keys.publicKey).then(() => {
-      message.success('ACCOUNT_CREATED_SUCCESSFULLY');
-      navigate('/auth/login');
-    }).catch(e => {
-      setCreationLoading(false);
-      message.error('FAILED_TO_CRATE_ACCOUNT');
-    })
-  }
-
   return <Space direction={'vertical'} style={{width: '100%'}}>
     {showWarning && (
       <Alert
@@ -78,108 +76,104 @@ export default function RegisterWithMnemonic() {
         closable={true}
       />
     )}
-    <Form
-      layout={'vertical'}
-      form={form}
-      onFinish={onFinishCreation}
-    >
-      {showMnemonic ? (
-        <Space direction={'vertical'} style={{width: '100%', marginBottom: 10}}>
-          <Form.Item label={'Mnemonic phrase'} name={'mnemonic'} style={{marginBottom: 0}}>
-            <Input.TextArea
-              disabled={true}
-              autoSize={{maxRows: 6}}
-            />
-          </Form.Item>
-          <Button
-            icon={<FontAwesomeIcon icon={faDownload}/>}
-            block
-            onClick={downloadMnemonic}
-          >
-            Save Mnemonic Phrase To Continue...
-          </Button>
-        </Space>
-      ) : (
+    
+      <Space direction={'vertical'} style={{width: '100%', marginBottom: 10}}>
+        <Input.TextArea
+          disabled={true}
+          value={mnemonic}
+          autoSize={{maxRows: 6}}
+        />
         <Button
-          block style={{marginBottom: 10}} onClick={() => setShowMnemonic(true)}
-          icon={<FontAwesomeIcon icon={faEye}/>}
+          icon={<FontAwesomeIcon icon={faDownload}/>}
+          type={'primary'}
+          block
+          onClick={downloadMnemonic}
+          loading={creationLoading}
         >
-          Display Mnemonic
+          Create Account
         </Button>
-      )}
-      {showKeys && (
-        <>
-          <Form.Item label={'Public key'} name={'publicKey'}>
-            <Input
-              disabled={true}
-              addonAfter={<>
-                <Popover trigger={'click'} content={'Copied'}>
-                  <Button type={'text'} size={'small'} onClick={() => copyText(keys.publicKey)}>
-                    <FontAwesomeIcon icon={faCopy}/>
-                  </Button>
-                </Popover>
-              </>}
-            />
-          </Form.Item>
-          <Form.Item label={'Private key'} name={'privateKey'}>
-            <Input.Password
-              disabled={true}
-              addonAfter={<>
-                <Popover trigger={'click'} content={'Copied'}>
-                  <Button type={'text'} size={'small'} onClick={() => copyText(keys.privateKey)}>
-                    <FontAwesomeIcon icon={faCopy}/>
-                  </Button>
-                </Popover>
-              </>}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Popconfirm
-              title={'Have you stored keys securely?'}
-              description={'Please make sure that you have saved your keys at a safe place.'}
-              okText={"Yes, I'm sure"}
-              onConfirm={() => form.submit()}
-            >
-              <Button type={'primary'} shape={'round'} block size={'large'} loading={creationLoading}>
-                Create Account
-              </Button>
-            </Popconfirm>
-          </Form.Item>
-
-          <Popover
-            content={
-              <>
-                <Typography.Text>
-                  Encryption Password:
-                </Typography.Text>
-                <Input.Password
-                  value={exportEncryptionPassword}
-                  placeholder={'Encryption Password'}
-                  onChange={e => setExportEncryptionPassword(e.target.value)}
-                  disabled={exporting}
-                />
-                <Button
-                  type={'primary'} block style={{marginTop: 10}}
-                  icon={<FontAwesomeIcon icon={faFileExport}/>}
-                  onClick={exportKeystore}
-                  loading={exporting}
-                >
-                  Export
+      </Space>
+      <Modal
+        title={'Account'}
+        centered
+        open={openModal}
+        onOk={() => {
+          message.success('ACCOUNT_CREATED_SUCCESSFULLY');
+          setOpenModal(false);
+          navigate('/auth/login', {replace: true})
+        }}
+        onCancel={() => setOpenModal(false)}
+        okText="Finish"
+      >
+        <Form
+          layout={'vertical'}
+          form={form}
+        >
+        <Form.Item label={'Account ID'} name={'accountId'}>
+          <Input
+            disabled={true}
+            addonAfter={<>
+              <Popover trigger={'click'} content={'Copied'}>
+                <Button type={'text'} size={'small'} onClick={() => copyText(keys.publicKey)}>
+                  <FontAwesomeIcon icon={faCopy}/>
                 </Button>
-              </>
-            }
-            title="Export keystore"
+              </Popover>
+            </>}
+          />
+        </Form.Item>
+        <Form.Item label={'Public key'} name={'publicKey'}>
+          <Input
+            disabled={true}
+            addonAfter={<>
+              <Popover trigger={'click'} content={'Copied'}>
+                <Button type={'text'} size={'small'} onClick={() => copyText(keys.publicKey)}>
+                  <FontAwesomeIcon icon={faCopy}/>
+                </Button>
+              </Popover>
+            </>}
+          />
+        </Form.Item>
+        <Form.Item label={'Private key'}>
+          <Input.Password
+            disabled={true}
+            value={keys?.privateKey}
+            addonAfter={<>
+              <Popover trigger={'click'} content={'Copied'}>
+                <Button type={'text'} size={'small'} onClick={() => copyText(keys.privateKey)}>
+                  <FontAwesomeIcon icon={faCopy}/>
+                </Button>
+              </Popover>
+            </>}
+          />
+        </Form.Item>
+        <Popover content={<>
+          <Typography.Text>
+            Encryption Password:
+          </Typography.Text>
+          <Input.Password
+            value={exportEncryptionPassword}
+            placeholder={'Encryption Password'}
+            onChange={e => setExportEncryptionPassword(e.target.value)}
+            disabled={exporting}
+          />
+          <Button
+            type={'primary'} block style={{marginTop: 10}}
+            icon={<FontAwesomeIcon icon={faFileExport}/>}
+            onClick={exportKeystore}
+            loading={exporting}
           >
-            <Button
-              size={'middle'} shape={'round'} block
-              icon={<FontAwesomeIcon icon={faLock}/>}
-              loading={exporting}
-            >
-              Download Keystore
-            </Button>
-          </Popover>
-        </>
-      )}
-    </Form>
+            Export
+          </Button>
+        </>} title="Export keystore">
+          <Button
+            size={'middle'} shape={'round'} block
+            icon={<FontAwesomeIcon icon={faLock}/>}
+            loading={exporting}
+          >
+            Download Keystore
+          </Button>
+        </Popover>
+        </Form>
+      </Modal>
   </Space>
 }
