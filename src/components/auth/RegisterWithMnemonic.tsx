@@ -47,6 +47,10 @@ export default function RegisterWithMnemonic() {
     setExporting(false);
   }
 
+  const copyText = async (txt: string) => {
+    return navigator.clipboard.writeText(txt);
+  }
+
   return <Space direction={'vertical'} style={{width: '100%'}}>
     <Alert
       type={'warning'}
@@ -89,9 +93,11 @@ export default function RegisterWithMnemonic() {
             <Input
               disabled={true}
               addonAfter={<>
-                <Button type={'text'} size={'small'}>
-                  <FontAwesomeIcon icon={faCopy}/>
-                </Button>
+                <Popover trigger={'click'} content={'Copied'}>
+                  <Button type={'text'} size={'small'} onClick={() => copyText(keys.publicKey)}>
+                    <FontAwesomeIcon icon={faCopy}/>
+                  </Button>
+                </Popover>
               </>}
             />
           </Form.Item>
@@ -99,9 +105,11 @@ export default function RegisterWithMnemonic() {
             <Input.Password
               disabled={true}
               addonAfter={<>
-                <Button type={'text'} size={'small'}>
-                  <FontAwesomeIcon icon={faCopy}/>
-                </Button>
+                <Popover trigger={'click'} content={'Copied'}>
+                  <Button type={'text'} size={'small'} onClick={() => copyText(keys.privateKey)}>
+                    <FontAwesomeIcon icon={faCopy}/>
+                  </Button>
+                </Popover>
               </>}
             />
           </Form.Item>
