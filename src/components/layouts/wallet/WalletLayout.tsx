@@ -13,12 +13,12 @@ import {loadPrice} from "@/redux/actions/app.actions.ts";
 export default function WalletLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const {isLoggedIn, accessToken, networkAccountId, privateKey, publicKey} = useAppSelector(state => state.auth);
+  const {isLoggedIn, authMethod, networkAccountId, privateKey} = useAppSelector(state => state.auth);
   const {profile, currencyCode} = useAppSelector(state => state.app);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
-    token: { colorBgContainer, colorText },
+    token: { colorBgContainer },
   } = theme.useToken();
 
   const [width, setWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth: 0);
@@ -51,9 +51,8 @@ export default function WalletLayout() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    console.log(profile);
-    if (isLoggedIn && !profile) dispatch(loadUserProfile());
-  }, [profile, isLoggedIn]);
+    if (isLoggedIn && !profile && authMethod === 'account') dispatch(loadUserProfile());
+  }, [profile, isLoggedIn, authMethod]);
 
   useEffect(() => {
     if (networkAccountId && privateKey) {

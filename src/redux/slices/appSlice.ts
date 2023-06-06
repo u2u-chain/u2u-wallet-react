@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {loadUserProfile} from "@/redux/actions/auth.actions.ts";
+import {doSignInWithPrivateKey, loadUserProfile} from "@/redux/actions/auth.actions.ts";
 import {loadAccountBalance, loadPrice} from "@/redux/actions/app.actions.ts";
 import {COIN_CODE} from "@/configs/app.config.ts";
 
@@ -59,6 +59,12 @@ export const appSlice = createSlice({
       if (action.payload[COIN_CODE] && action.payload[COIN_CODE][state.currencyCode])
         state.currencyRate = action.payload[COIN_CODE][state.currencyCode];
       state.currencyLoading = false;
+    }).addCase(doSignInWithPrivateKey.fulfilled, (state) => {
+      state.profile = {
+        fullName: 'U2U User',
+        email: 'anonymous',
+        avatar: ''
+      }
     });
   }
 });
