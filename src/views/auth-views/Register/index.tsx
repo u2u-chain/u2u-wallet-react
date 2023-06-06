@@ -15,12 +15,12 @@ export default function RegisterPage() {
       </Typography.Text>
       <Tabs
         items={[{
-          key: 'account',
-          label: 'Managed',
+          key: 'easy',
+          label: 'Easy',
           children: <RegisterForm/>
         }, {
-          key: 'key-pair',
-          label: 'Key Pair',
+          key: 'advanced',
+          label: 'Advanced',
           children: <RegisterWithMnemonic/>
         }]}
       />
