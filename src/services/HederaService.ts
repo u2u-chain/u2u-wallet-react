@@ -80,6 +80,15 @@ class HederaService {
       publicKey: privateKey.publicKey.toStringDer(),
     }
   }
+
+  async restoreKeyFromMnemonic(mnemonicString: string) {
+    const mnemonic = await Mnemonic.fromString(mnemonicString);
+    const privateKey = await mnemonic.toLegacyPrivateKey();
+    return {
+      privateKey: privateKey.toStringDer(),
+      publicKey: privateKey.publicKey.toStringDer(),
+    }
+  }
 }
 
 export default new HederaService();

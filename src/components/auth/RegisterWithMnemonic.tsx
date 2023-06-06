@@ -80,43 +80,43 @@ export default function RegisterWithMnemonic() {
       />
     )}
 
-      <Space direction={'vertical'} style={{width: '100%', marginBottom: 10}}>
-        <Input.TextArea
-          disabled={true}
-          value={mnemonic}
-          autoSize={{maxRows: 6}}
-        />
-        <Button
-          icon={<FontAwesomeIcon icon={faDownload}/>}
-          type={'primary'}
-          block
-          onClick={downloadMnemonic}
-          loading={creationLoading}
-        >
-          Create Account
-        </Button>
-      </Space>
-      <Modal
-        title={'Account'}
-        centered
-        open={openModal}
-        onCancel={() => {
-          setOpenModal(false);
-          navigate('/auth/login', {replace: true})
-        }}
-        footer={false}
-        okText="Finish"
+    <Space direction={'vertical'} style={{width: '100%', marginBottom: 10}}>
+      <Input.TextArea
+        disabled={true}
+        value={mnemonic}
+        autoSize={{maxRows: 6}}
+      />
+      <Button
+        icon={<FontAwesomeIcon icon={faDownload}/>}
+        type={'primary'}
+        block
+        onClick={downloadMnemonic}
+        loading={creationLoading}
       >
-        <Form
-          layout={'vertical'}
-          form={form}
-        >
+        Create Account
+      </Button>
+    </Space>
+    <Modal
+      title={'Account'}
+      centered
+      open={openModal}
+      onCancel={() => {
+        setOpenModal(false);
+        navigate('/auth/login', {replace: true})
+      }}
+      footer={false}
+      okText="Finish"
+    >
+      <Form
+        layout={'vertical'}
+        form={form}
+      >
         <Form.Item label={'Account ID'} name={'accountId'}>
           <Input
             disabled={true}
             addonAfter={<>
               <Popover trigger={'click'} content={'Copied'}>
-                <Button type={'text'} size={'small'} onClick={() => copyText(keys.publicKey)}>
+                <Button type={'text'} size={'small'} onClick={() => copyText(accountId)}>
                   <FontAwesomeIcon icon={faCopy}/>
                 </Button>
               </Popover>
@@ -175,7 +175,7 @@ export default function RegisterWithMnemonic() {
             Download Keystore
           </Button>
         </Popover>
-        </Form>
-      </Modal>
+      </Form>
+    </Modal>
   </Space>
 }
