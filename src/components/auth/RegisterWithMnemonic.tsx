@@ -18,6 +18,7 @@ export default function RegisterWithMnemonic() {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [mnemonic, setMnemonic] = useState('');
+  const [accountId, setAccountId] = useState('');
 
   const initialize = async () => {
     const generatedKeys = await HederaService.generateMnemonicPrivateKey();
@@ -29,7 +30,7 @@ export default function RegisterWithMnemonic() {
     // Generate Mnemonic
     initialize().then(() => null);
   }, []);
-  
+
   useEffect(() => {
     console.log('mnemonic', mnemonic)
   }, [mnemonic])
@@ -37,13 +38,15 @@ export default function RegisterWithMnemonic() {
   const downloadMnemonic = () => {
     downloadFile('u2u-wallet-mnemonic.txt', keys.mnemonic);
     ApiService.createAccountWithPublicKey(keys.publicKey).then((value) => {
-      form.setFieldsValue(value)
+      setAccountId(value.accountId);
+      form.setFieldsValue(value);
     }).catch(e => {
       setCreationLoading(false);
       message.error('FAILED_TO_CRATE_ACCOUNT');
     })
     setShowWarning(false);
     setOpenModal(true);
+    message.success('ACCOUNT_CREATED_SUCCESSFULLY');
   }
 
   const exportKeystore = async () => {
@@ -53,9 +56,9 @@ export default function RegisterWithMnemonic() {
     }
     setExporting(true);
     const data = {
-      privateKey: await encryptWithPassword(keys.privateKey, exportEncryptionPassword),
-      publicKey: await encryptWithPassword(keys.publicKey, exportEncryptionPassword),
-      mnemonic: await encryptWithPassword(keys.mnemonic, exportEncryptionPassword),
+      accountId,
+      privateKey: encryptWithPassword(keys.privateKey, exportEncryptionPassword),
+      publicKey: encryptWithPassword(keys.publicKey, exportEncryptionPassword),
     }
     downloadFile('keystore.json', JSON.stringify(data));
     message.success('EXPORTED');
@@ -76,7 +79,7 @@ export default function RegisterWithMnemonic() {
         closable={true}
       />
     )}
-    
+
       <Space direction={'vertical'} style={{width: '100%', marginBottom: 10}}>
         <Input.TextArea
           disabled={true}
@@ -97,12 +100,11 @@ export default function RegisterWithMnemonic() {
         title={'Account'}
         centered
         open={openModal}
-        onOk={() => {
-          message.success('ACCOUNT_CREATED_SUCCESSFULLY');
+        onCancel={() => {
           setOpenModal(false);
           navigate('/auth/login', {replace: true})
         }}
-        onCancel={() => setOpenModal(false)}
+        footer={false}
         okText="Finish"
       >
         <Form
