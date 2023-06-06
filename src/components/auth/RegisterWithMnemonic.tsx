@@ -13,6 +13,7 @@ export default function RegisterWithMnemonic() {
   const [showKeys, setShowKeys] = useState(false);
   const [exportEncryptionPassword, setExportEncryptionPassword] = useState('');
   const [exporting, setExporting] = useState(false);
+  const [showWarning, setShowWarning] = useState(true);
 
   const initialize = async () => {
     const generatedKeys = await HederaService.generateMnemonicPrivateKey();
@@ -29,6 +30,7 @@ export default function RegisterWithMnemonic() {
     downloadFile('u2u-wallet-mnemonic.txt', keys.mnemonic);
     setShowKeys(true);
     setShowMnemonic(false);
+    setShowWarning(false);
   }
 
   const exportKeystore = async () => {
@@ -52,13 +54,15 @@ export default function RegisterWithMnemonic() {
   }
 
   return <Space direction={'vertical'} style={{width: '100%'}}>
-    <Alert
-      type={'warning'}
-      icon={<FontAwesomeIcon icon={faInfoCircle}/>}
-      showIcon={true}
-      message={'Please store your keys securely to prevent unauthorized accesses.'}
-      closable={true}
-    />
+    {showWarning && (
+      <Alert
+        type={'warning'}
+        icon={<FontAwesomeIcon icon={faInfoCircle}/>}
+        showIcon={true}
+        message={'Please store your keys securely to prevent unauthorized accesses.'}
+        closable={true}
+      />
+    )}
     <Form
       layout={'vertical'}
       form={form}
@@ -119,25 +123,30 @@ export default function RegisterWithMnemonic() {
             </Button>
           </Form.Item>
 
-          <Popover content={<>
-            <Typography.Text>
-              Encryption Password:
-            </Typography.Text>
-            <Input.Password
-              value={exportEncryptionPassword}
-              placeholder={'Encryption Password'}
-              onChange={e => setExportEncryptionPassword(e.target.value)}
-              disabled={exporting}
-            />
-            <Button
-              type={'primary'} block style={{marginTop: 10}}
-              icon={<FontAwesomeIcon icon={faFileExport}/>}
-              onClick={exportKeystore}
-              loading={exporting}
-            >
-              Export
-            </Button>
-          </>} title="Export keystore">
+          <Popover
+            content={
+              <>
+                <Typography.Text>
+                  Encryption Password:
+                </Typography.Text>
+                <Input.Password
+                  value={exportEncryptionPassword}
+                  placeholder={'Encryption Password'}
+                  onChange={e => setExportEncryptionPassword(e.target.value)}
+                  disabled={exporting}
+                />
+                <Button
+                  type={'primary'} block style={{marginTop: 10}}
+                  icon={<FontAwesomeIcon icon={faFileExport}/>}
+                  onClick={exportKeystore}
+                  loading={exporting}
+                >
+                  Export
+                </Button>
+              </>
+            }
+            title="Export keystore"
+          >
             <Button
               size={'middle'} shape={'round'} block
               icon={<FontAwesomeIcon icon={faLock}/>}
