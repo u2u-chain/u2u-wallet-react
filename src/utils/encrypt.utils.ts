@@ -1,27 +1,23 @@
-import crypto from "crypto";
+import * as CryptoJS from 'crypto-js';
 
-export async function encryptWithPassword(plaintextData: string, password: string) {
-  const key = crypto.pbkdf2Sync(password, "", 100000, 32, "sha256");
-  const iv = Buffer.alloc(16);
-
-  const encryptor = crypto.createCipheriv("aes-256-ctr", key, iv);
-  encryptor.setEncoding("hex");
-
-  let encryptedData = encryptor.update(plaintextData, "utf8", "hex");
-  encryptedData += encryptor.final("hex");
-
-  return encryptedData;
+export function encryptWithPassword(plaintext, password) {
+  return CryptoJS.AES.encrypt(plaintext, password).toString();
 }
 
 export async function decryptWithPassword(encryptedData: string, password: string) {
-  const key = crypto.pbkdf2Sync(password, "", 100000, 32, "sha256");
-  const iv = Buffer.alloc(16);
-
-  const decipher = crypto.createDecipheriv("aes-256-ctr", key, iv);
-  decipher.setEncoding("utf8");
-
-  let decryptedData = decipher.update(encryptedData, "hex", "utf8");
-  decryptedData += decipher.final("utf8");
-
-  return decryptedData;
+  const decrypted = CryptoJS.AES.decrypt(encryptedData, password);
+  if (decrypted) {
+    try {
+      console.log(decrypted);
+      const str = decrypted.toString(CryptoJS.enc.Utf8);
+      if (str.length > 0) {
+        return str;
+      } else {
+        return 'error 1';
+      }
+    } catch (e) {
+      return 'error 2';
+    }
+  }
+  return 'error 3';
 }
