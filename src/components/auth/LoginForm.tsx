@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "@/views/auth-views/Login/login.module.css";
 import {Button, Form, Input, message, Typography} from "antd";
-import {Link} from "react-router-dom";
 import {useAppDispatch} from "@/redux/store.ts";
 import {doSignIn} from "@/redux/actions/auth.actions.ts";
 
@@ -50,9 +49,6 @@ export default function LoginForm() {
           Sign In
         </Button>
       </Form.Item>
-      <Typography.Paragraph>
-        Haven't got an account yet? <Link to={'/auth/register'}>Create One</Link>
-      </Typography.Paragraph>
     </Form>
   </>
 }

@@ -13,21 +13,17 @@
 }
 
 .logoWrapper {
-  display: flex;
-  align-items: center;
+  display: none;
+  text-align: center;
   justify-content: center;
   padding-bottom: 24px;
 }
 
 .logo {
-  display: none;
   height: 40px;
 }
 
 .authSection {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
 }
 
 .authForm {
@@ -36,6 +32,7 @@
   display: flex;
   padding: 48px;
   align-items: center;
+  height: 100%;
 }
 
 
@@ -43,13 +40,14 @@
   .authFigure {
     display: none;
   }
-  .logo {
-    margin-top: 48px;
+  .logoWrapper {
     display: block;
   }
+  .logo {
+    margin-top: 48px;
+  }
   .authOuter {
-    align-items: center;
-    justify-content: center;
+    display: block;
   }
   .authFigure {
     display: none;
