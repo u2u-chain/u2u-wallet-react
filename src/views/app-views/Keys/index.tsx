@@ -7,7 +7,7 @@ import React from "react";
 export default function KeysPage() {
   const privateKey = '220003237d79123541cd36b0da1ef603b3eb9714d161c1a907d7d94716f00a8e13257d';
   const publicKey = '220003237d79123541cd36b0da1ef603b3eb9714d161c1a907d7d94716f00a8e13257c';
-  
+
   return (
     <>
       <Card bordered={false}>
@@ -25,7 +25,7 @@ export default function KeysPage() {
               <Form
                 layout={"vertical"}
               >
-                
+
                 <Form.Item
                   name={'privateKey'}
                   label={'Private Key'}
@@ -33,7 +33,7 @@ export default function KeysPage() {
                   <div style={{display: "flex"}}>
                     <Input.Password
                       style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0, flexGrow: 1 }}
-                      value={privateKey}
+                      value={privateKey.slice(32)}
                     />
                     <Tooltip title={"Copy"}>
                       <Button
@@ -57,7 +57,7 @@ export default function KeysPage() {
                   <div style={{display: "flex"}}>
                     <Input
                       style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0, flexGrow: 1 }}
-                      value={publicKey}
+                      value={publicKey.slice(24)}
                     />
                     <Tooltip title={"Copy"}>
                       <Button
