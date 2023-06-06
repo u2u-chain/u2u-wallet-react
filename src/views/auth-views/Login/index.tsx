@@ -1,10 +1,6 @@
-import React, {useEffect} from "react";
-import {Button, Form, Input, message, Tabs, Typography} from "antd";
+import React from "react";
+import {Tabs, Typography} from "antd";
 import styles from './login.module.css';
-import ApiService from "@/services/ApiService.ts";
-import {Link} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "@/redux/store.ts";
-import {doSignIn} from "@/redux/actions/auth.actions.ts";
 import LogoWhite from "@/assets/logo_white.png";
 import LoginForm from "@/components/auth/LoginForm.tsx";
 import LoginWithKeyPair from "@/components/auth/LoginWithKeyPair.tsx";
@@ -27,7 +23,7 @@ export default function LoginPage() {
           children: <LoginForm/>
         }, {
           key: 'key-pairs',
-          label: 'Key Pair',
+          label: 'Private Key',
           children: <LoginWithKeyPair/>
         }]}
       />

@@ -2,7 +2,7 @@ import {
   AccountBalanceQuery,
   AccountId,
   Client,
-  Hbar, TransactionId,
+  Hbar, Mnemonic, TransactionId,
   TransactionReceiptQuery, TransactionRecordQuery,
   TransferTransaction
 } from "@hashgraph/sdk";
@@ -68,6 +68,17 @@ class HederaService {
     return await new TransactionReceiptQuery()
       .setTransactionId(tid)
       .execute(this.client);
+  }
+
+  async generateMnemonicPrivateKey() {
+    const mnemonic = await Mnemonic.generate();
+    const privateKey = await mnemonic.toLegacyPrivateKey();
+    const derPrivateKey = privateKey.toStringDer();
+    return {
+      mnemonic: mnemonic.toString(),
+      privateKey: derPrivateKey.toString(),
+      publicKey: privateKey.publicKey.toStringDer(),
+    }
   }
 }
 
