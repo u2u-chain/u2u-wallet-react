@@ -3,7 +3,6 @@ import {Alert, Button, Form, Input, message, Typography} from "antd";
 import styles from "@/views/auth-views/Login/login.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import ApiService from "@/services/ApiService.ts";
-import HederaService from "@/services/HederaService.ts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faInfoCircle} from "@fortawesome/pro-solid-svg-icons";
 
@@ -81,7 +80,7 @@ export default function RegisterForm() {
           </Button>
         </Form.Item>
       </Form>
-      <Typography.Paragraph>
+      <Typography.Paragraph style={{color: 'var(--text-light)'}}>
         Have an account? <Link to={'/auth/login'}>Login</Link>
       </Typography.Paragraph>
     </>

@@ -50,6 +50,7 @@ export default function LoginWithKeystore() {
       value={password}
       placeholder={'Decryption Password'}
       onChange={e => setPassword(e.target.value)}
+      size={'large'}
     />
     <Button
       type={'primary'} size={'large'} shape={'round'} block

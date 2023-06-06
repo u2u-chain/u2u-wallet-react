@@ -32,13 +32,16 @@ export default function LoginWithMnemonic() {
     layout={'vertical'}
   >
     <Form.Item label={'Account ID'} name={'accountId'}>
-      <Input placeholder={'Shard.Realm.Num'}/>
+      <Input placeholder={'Shard.Realm.Num'} size={'large'}/>
     </Form.Item>
     <Form.Item label={'Mnemonic phrases'} name={'mnemonic'}>
-      <Input.TextArea placeholder={'Paste your mnemonic phrase here...'}/>
+      <Input.TextArea placeholder={'Paste your mnemonic phrase here...'} size={'large'}/>
     </Form.Item>
     <Form.Item>
-      <Button block type={'primary'} shape={'round'} htmlType={'submit'}>
+      <Button
+        block type={'primary'} shape={'round'} htmlType={'submit'}
+        size={'large'}
+      >
         Continue...
       </Button>
     </Form.Item>

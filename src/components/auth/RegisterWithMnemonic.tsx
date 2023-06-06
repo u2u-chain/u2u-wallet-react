@@ -92,9 +92,11 @@ export default function RegisterWithMnemonic() {
       <Button
         icon={<FontAwesomeIcon icon={faDownload}/>}
         type={'primary'}
+        shape={'round'}
         block
         onClick={downloadMnemonic}
         loading={creationLoading}
+        size={'large'}
       >
         Create Account
       </Button>

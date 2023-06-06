@@ -23,14 +23,17 @@ export default function LoginWithKeyPair() {
       onFinish={onFinish}
     >
       <Form.Item label={'Private Key'} name={'privateKey'}>
-        <Input placeholder={'302e02100300...'}/>
+        <Input placeholder={'302e02100300...'} size={'large'}/>
       </Form.Item>
       <Form.Item label={'Account ID'} name={'accountId'}>
-        <Input placeholder={'Shard.Realm.Num'}/>
+        <Input placeholder={'Shard.Realm.Num'} size={'large'}/>
       </Form.Item>
       <Form.Item>
-        <Button size={'large'} shape={'round'} type={'primary'} htmlType={'submit'}>
-          Continue
+        <Button
+          size={'large'} shape={'round'} type={'primary'} htmlType={'submit'}
+          block
+        >
+          Continue...
         </Button>
       </Form.Item>
     </Form>

@@ -45,6 +45,7 @@ export default function LoginForm() {
           shape={'round'}
           htmlType={'submit'}
           className={styles.submitBtn}
+          block
         >
           Sign In
         </Button>

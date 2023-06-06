@@ -1,7 +1,7 @@
 import React from "react";
 import {Tabs, Typography} from "antd";
 import styles from './login.module.css';
-import LogoWhite from "@/assets/logo_white.png";
+import LogoGradient from "@/assets/logo_gradient.png";
 import LoginForm from "@/components/auth/LoginForm.tsx";
 import LoginWithKeyPair from "@/components/auth/LoginWithKeyPair.tsx";
 import LoginWithKeystore from "@/components/auth/LoginWithKeystore.tsx";
@@ -14,7 +14,7 @@ export default function LoginPage() {
 
   return (
     <div style={{width: '100%'}}>
-      <img src={LogoWhite} alt={'u2u wallet'} className={styles.logo}/>
+      <img src={LogoGradient} alt={'u2u wallet'} className={styles.logo}/>
       <Typography.Title level={2} className={styles.title}>
         Sign In
       </Typography.Title>
@@ -49,7 +49,7 @@ export default function LoginPage() {
             children: <LoginWithKeystore/>
           }]}
         />
-        <Typography.Paragraph style={{marginTop: 10}}>
+        <Typography.Paragraph style={{marginTop: 10, color: 'var(--text-light)'}}>
           Haven't got an account yet? <Link to={'/auth/register'}>Create One</Link>
         </Typography.Paragraph>
       </div>
