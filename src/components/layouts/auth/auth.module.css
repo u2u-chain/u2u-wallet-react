@@ -2,11 +2,15 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-
+  background-size: cover;
 }
 
 .authFigure {
   flex: 1;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 64px;
 }
 
 .logoWrapper {
@@ -25,12 +29,10 @@
   width: 100%;
   max-width: 500px;
   display: flex;
-  padding: 24px;
 }
 
 .authForm {
   background-color: #ffffff11;
-  border-radius: 24px;
   flex: 1;
   display: flex;
   padding: 48px;
@@ -54,6 +56,7 @@
     display: block;
   }
   .authForm {
+    border-radius: 24px;
     padding: 32px;
   }
 }
