@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
 import HederaService from "@/services/HederaService.ts";
-import {Alert, Button, Form, Input, message, Popover, Space, Typography} from "antd";
+import {Alert, Button, Form, Input, message, Popconfirm, Popover, Space, Typography} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faDownload, faEye, faFileExport, faInfoCircle, faLock} from "@fortawesome/pro-solid-svg-icons";
 import {downloadFile} from "@/utils/common.utils.ts";
 import {encryptWithPassword} from "@/utils/encrypt.utils.ts";
+import ApiService from "@/services/ApiService.ts";
+import {useNavigate} from "react-router-dom";
 
 export default function RegisterWithMnemonic() {
   const [form] = Form.useForm();
@@ -14,6 +16,8 @@ export default function RegisterWithMnemonic() {
   const [exportEncryptionPassword, setExportEncryptionPassword] = useState('');
   const [exporting, setExporting] = useState(false);
   const [showWarning, setShowWarning] = useState(true);
+  const [creationLoading, setCreationLoading] = useState(false);
+  const navigate = useNavigate();
 
   const initialize = async () => {
     const generatedKeys = await HederaService.generateMnemonicPrivateKey();
@@ -53,6 +57,17 @@ export default function RegisterWithMnemonic() {
     return navigator.clipboard.writeText(txt);
   }
 
+  const onFinishCreation = async () => {
+    setCreationLoading(true);
+    ApiService.createAccountWithPublicKey(keys.publicKey).then(() => {
+      message.success('ACCOUNT_CREATED_SUCCESSFULLY');
+      navigate('/auth/login');
+    }).catch(e => {
+      setCreationLoading(false);
+      message.error('FAILED_TO_CRATE_ACCOUNT');
+    })
+  }
+
   return <Space direction={'vertical'} style={{width: '100%'}}>
     {showWarning && (
       <Alert
@@ -66,6 +81,7 @@ export default function RegisterWithMnemonic() {
     <Form
       layout={'vertical'}
       form={form}
+      onFinish={onFinishCreation}
     >
       {showMnemonic ? (
         <Space direction={'vertical'} style={{width: '100%', marginBottom: 10}}>
@@ -118,9 +134,16 @@ export default function RegisterWithMnemonic() {
             />
           </Form.Item>
           <Form.Item>
-            <Button type={'primary'} shape={'round'} htmlType={'submit'} block size={'large'}>
-              Create Account
-            </Button>
+            <Popconfirm
+              title={'Have you stored keys securely?'}
+              description={'Please make sure that you have saved your keys at a safe place.'}
+              okText={"Yes, I'm sure"}
+              onConfirm={() => form.submit()}
+            >
+              <Button type={'primary'} shape={'round'} block size={'large'} loading={creationLoading}>
+                Create Account
+              </Button>
+            </Popconfirm>
           </Form.Item>
 
           <Popover
