@@ -39,7 +39,10 @@ export default function RegisterWithMnemonic() {
     downloadFile('u2u-wallet-mnemonic.txt', keys.mnemonic);
     ApiService.createAccountWithPublicKey(keys.publicKey).then((value) => {
       setAccountId(value.accountId);
-      form.setFieldsValue(value);
+      form.setFieldsValue({
+        ...value,
+        mnemonic: mnemonic
+      });
     }).catch(e => {
       setCreationLoading(false);
       message.error('FAILED_TO_CRATE_ACCOUNT');
@@ -111,6 +114,18 @@ export default function RegisterWithMnemonic() {
         layout={'vertical'}
         form={form}
       >
+        <Form.Item label={'Mnemonic'} name={'mnemonic'}>
+          <Input
+            disabled={true}
+            addonAfter={<>
+              <Popover trigger={'click'} content={'Copied'}>
+                <Button type={'text'} size={'small'} onClick={() => copyText(mnemonic)}>
+                  <FontAwesomeIcon icon={faCopy}/>
+                </Button>
+              </Popover>
+            </>}
+          />
+        </Form.Item>
         <Form.Item label={'Account ID'} name={'accountId'}>
           <Input
             disabled={true}
