@@ -1,18 +1,19 @@
 import React, {useEffect, useState} from "react";
 import HederaService from "@/services/HederaService.ts";
-import {Alert, Button, Form, Input, message, Popover, Space, Typography} from "antd";
+import {Alert, Button, Form, Input, message, Modal, Popover, Space, Typography} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faDownload, faEye, faFileExport, faInfoCircle, faLock} from "@fortawesome/pro-solid-svg-icons";
 import {downloadFile} from "@/utils/common.utils.ts";
 import {encryptWithPassword} from "@/utils/encrypt.utils.ts";
+import {useNavigate} from "react-router-dom";
 
 export default function RegisterWithMnemonic() {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const [keys, setKeys] = useState<any>({})
-  const [showMnemonic, setShowMnemonic] = useState(true);
-  const [showKeys, setShowKeys] = useState(false);
   const [exportEncryptionPassword, setExportEncryptionPassword] = useState('');
   const [exporting, setExporting] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const initialize = async () => {
     const generatedKeys = await HederaService.generateMnemonicPrivateKey();
@@ -27,8 +28,7 @@ export default function RegisterWithMnemonic() {
 
   const downloadMnemonic = () => {
     downloadFile('u2u-wallet-mnemonic.txt', keys.mnemonic);
-    setShowKeys(true);
-    setShowMnemonic(false);
+    setOpenModal(true);
   }
 
   const exportKeystore = async () => {
@@ -63,32 +63,34 @@ export default function RegisterWithMnemonic() {
       layout={'vertical'}
       form={form}
     >
-      {showMnemonic ? (
-        <Space direction={'vertical'} style={{width: '100%', marginBottom: 10}}>
-          <Form.Item label={'Mnemonic phrase'} name={'mnemonic'} style={{marginBottom: 0}}>
-            <Input.TextArea
-              disabled={true}
-              autoSize={{maxRows: 6}}
-            />
-          </Form.Item>
-          <Button
-            icon={<FontAwesomeIcon icon={faDownload}/>}
-            block
-            onClick={downloadMnemonic}
-          >
-            Save Mnemonic Phrase To Continue...
-          </Button>
-        </Space>
-      ) : (
+      <Space direction={'vertical'} style={{width: '100%', marginBottom: 10}}>
+        <Form.Item label={'Mnemonic phrase'} name={'mnemonic'} style={{marginBottom: 0}}>
+          <Input.TextArea
+            disabled={true}
+            autoSize={{maxRows: 6}}
+          />
+        </Form.Item>
         <Button
-          block style={{marginBottom: 10}} onClick={() => setShowMnemonic(true)}
-          icon={<FontAwesomeIcon icon={faEye}/>}
+          icon={<FontAwesomeIcon icon={faDownload}/>}
+          type={'primary'}
+          block
+          onClick={downloadMnemonic}
         >
-          Display Mnemonic
+          Create Account
         </Button>
-      )}
-      {showKeys && (
-        <>
+      </Space>
+      <Modal
+        title={'Account'}
+        centered
+        open={openModal}
+        onOk={() => {
+          setOpenModal(false);
+          navigate('/auth/login', {replace: true})
+        }}
+        onCancel={() => setOpenModal(false)}
+        okText="Finish"
+      >
+        
           <Form.Item label={'Public key'} name={'publicKey'}>
             <Input
               disabled={true}
@@ -113,12 +115,7 @@ export default function RegisterWithMnemonic() {
               </>}
             />
           </Form.Item>
-          <Form.Item>
-            <Button type={'primary'} shape={'round'} htmlType={'submit'} block size={'large'}>
-              Create Account
-            </Button>
-          </Form.Item>
-
+          
           <Popover content={<>
             <Typography.Text>
               Encryption Password:
@@ -146,8 +143,7 @@ export default function RegisterWithMnemonic() {
               Download Keystore
             </Button>
           </Popover>
-        </>
-      )}
+      </Modal>
     </Form>
   </Space>
 }
