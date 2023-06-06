@@ -13,6 +13,12 @@ class ApiService {
     return this.api('POST', 'auth/register', signUpFormData);
   }
 
+  createAccountWithPublicKey(publicKey: string) {
+    return this.api('POST', 'auth/createNetworkAccount', {
+      publicKey: publicKey,
+    })
+  }
+
   getProfile() {
     return this.api('GET', 'auth/profile');
   }

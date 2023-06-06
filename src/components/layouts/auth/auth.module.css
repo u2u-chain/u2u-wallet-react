@@ -1,8 +1,7 @@
 .authOuter {
-  height: 100%;
   display: flex;
   flex-direction: row;
-  background-size: cover;
+  overflow-y: scroll;
 }
 
 .authFigure {
@@ -41,7 +40,11 @@
 
 
 @media (max-width: 1200px) {
+  .authFigure {
+    display: none;
+  }
   .logo {
+    margin-top: 48px;
     display: block;
   }
   .authOuter {
