@@ -10,10 +10,9 @@ export default function LoginWithKeyPair() {
   const onFinish = async (values: {privateKey: string; accountId: string}) => {
     const response = await dispatch(doSignInWithPrivateKey(values)) as any;
     if (response.error) {
-      console.log(response);
       message.error('INVALID_PRIVATE_KEY');
     } else {
-      console.log(response);
+      message.success('SIGNED_IN');
     }
   }
 

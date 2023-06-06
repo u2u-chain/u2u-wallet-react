@@ -4,6 +4,7 @@ import styles from './login.module.css';
 import LogoWhite from "@/assets/logo_white.png";
 import LoginForm from "@/components/auth/LoginForm.tsx";
 import LoginWithKeyPair from "@/components/auth/LoginWithKeyPair.tsx";
+import LoginWithKeystore from "@/components/auth/LoginWithKeystore.tsx";
 
 export default function LoginPage() {
 
@@ -25,6 +26,10 @@ export default function LoginPage() {
           key: 'key-pairs',
           label: 'Private Key',
           children: <LoginWithKeyPair/>
+        }, {
+          key: 'keystore',
+          label: 'Keystore',
+          children: <LoginWithKeystore/>
         }]}
       />
     </div>

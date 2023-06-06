@@ -4,7 +4,7 @@ export function encryptWithPassword(plaintext, password) {
   return CryptoJS.AES.encrypt(plaintext, password).toString();
 }
 
-export async function decryptWithPassword(encryptedData: string, password: string) {
+export function decryptWithPassword(encryptedData: string, password: string) {
   const decrypted = CryptoJS.AES.decrypt(encryptedData, password);
   if (decrypted) {
     try {
@@ -13,11 +13,11 @@ export async function decryptWithPassword(encryptedData: string, password: strin
       if (str.length > 0) {
         return str;
       } else {
-        return 'error 1';
+        throw new Error('WRONG_KEY');
       }
-    } catch (e) {
-      return 'error 2';
+    } catch (e: any) {
+      throw new Error('FAILED_TO_DECRYPT');
     }
   }
-  return 'error 3';
+  throw new Error('INVALID_ENCRYPTION');
 }
