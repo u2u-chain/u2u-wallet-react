@@ -1,31 +1,44 @@
 .loginForm {
-  margin-top: 16px;
-  width: 100%;
+    margin-top: 16px;
+    width: 100%;
 }
 
 .logo {
-  height: 36px;
-  align-self: flex-start;
-  margin-bottom: 64px;
+    height: 36px;
+    align-self: flex-start;
+    margin-bottom: 64px;
+}
+
+.thirdPartiesSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.thirdPartiesSection img {
+    width: 16px;
+    height: 16px;
 }
 
 @media (max-width: 1200px) {
-  .logo {
-    display: none;
-    align-self: center;
-  }
+    .logo {
+        display: none;
+        align-self: center;
+    }
 
-  .title {
-    text-align: center;
-  }
+    .title {
+        text-align: center;
+    }
 
-  .description {
-    width: 100%;
-    text-align: center;
-  }
+    .description {
+        width: 100%;
+        text-align: center;
+    }
 
-  .submitBtn {
-    width: 100%;
-    margin-top: 32px;
-  }
+    .submitBtn {
+        width: 100%;
+        margin-top: 32px;
+    }
 }

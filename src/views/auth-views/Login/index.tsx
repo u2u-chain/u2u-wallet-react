@@ -21,7 +21,7 @@ export default function LoginPage() {
       <Typography.Paragraph className={styles.description}>
         Sign in to access your U2U Wallet & digital assets...
       </Typography.Paragraph>
-      <div>
+      <div style={{marginTop: 32}}>
         {loginMethod === 'password' && <LoginForm/>}
         {loginMethod === 'private-key' && <LoginWithKeyPair/>}
         {loginMethod === 'mnemonic' && <LoginWithMnemonic/>}
