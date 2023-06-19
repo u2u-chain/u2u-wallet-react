@@ -8,7 +8,7 @@ RUN yarn install --frozen-lockfile --production=false
 
 COPY . .
 
-FROM node:16-alpine AS create-build
+FROM node:16-alpine AS build
 
 WORKDIR /user/src/app
 
