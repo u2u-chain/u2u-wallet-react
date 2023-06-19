@@ -14,6 +14,8 @@ WORKDIR /user/src/app
 
 COPY --from=install-dependencies /user/src/app ./
 
+ENV VITE_APP_API_BASE=https://api-testnet-account.uniultra.xyz
+
 RUN npm run build
 
 FROM nginx:1.25.1-alpine
