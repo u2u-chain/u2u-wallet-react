@@ -8,7 +8,7 @@ export interface AppState {
   theme: 'light' | 'dark',
   sidebarOpened: boolean,
   profile?: {
-    fullName: string;
+    username: string;
     email: string;
     avatar: string;
   },
@@ -61,7 +61,7 @@ export const appSlice = createSlice({
       state.currencyLoading = false;
     }).addCase(doSignInWithPrivateKey.fulfilled, (state) => {
       state.profile = {
-        fullName: 'U2U User',
+        username: 'U2U User',
         email: 'anonymous',
         avatar: ''
       }

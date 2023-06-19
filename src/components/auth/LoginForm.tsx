@@ -24,9 +24,9 @@ export default function LoginForm() {
       layout={'vertical'}
       onFinish={onFinish}
     >
-      <Form.Item name={'email'} label={'Email'}>
+      <Form.Item name={'email'} label={'Email/Username'}>
         <Input
-          type={'email'}
+          type={'text'}
           size={'large'}
           placeholder={'example@email.com'}
         />

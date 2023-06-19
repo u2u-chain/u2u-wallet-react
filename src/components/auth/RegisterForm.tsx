@@ -48,20 +48,47 @@ export default function RegisterForm() {
         onFinish={onFinish}
         disabled={loading}
       >
-        <Form.Item name={'fullName'} label={'Full name'}>
+        <Form.Item
+          name={'username'} label={'Username'}
+          rules={[{
+            pattern: /^[a-zA-Z0-9]+$/,
+            message: 'Invalid Username'
+          }, {
+            min: 3,
+            message: 'Username is too short'
+          }, {
+            max: 40,
+            message: 'Username is too long'
+          }]}
+        >
           <Input
             size={'large'}
-            placeholder={'John Doe'}
+            placeholder={'u2user'}
           />
         </Form.Item>
-        <Form.Item name={'email'} label={'Email'}>
+        <Form.Item
+          name={'email'} label={'Email'}
+          rules={[{
+            type: "email",
+            message: 'Invalid Email'
+          }]}
+        >
           <Input
             type={'email'}
             size={'large'}
             placeholder={'example@email.com'}
           />
         </Form.Item>
-        <Form.Item name={'password'} label={'Password'}>
+        <Form.Item
+          name={'password'} label={'Password'}
+          rules={[{
+            min: 8,
+            message: 'Password is too short'
+          }, {
+            max: 100,
+            message: 'Password is too long'
+          }]}
+        >
           <Input
             size={'large'}
             type={'password'}

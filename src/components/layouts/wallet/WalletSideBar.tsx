@@ -32,7 +32,7 @@ export default function WalletSideBar({collapsed} : {collapsed: boolean}) {
             size={16}
           />}
         >
-          {collapsed ? "" : profile?.fullName}
+          {collapsed ? "" : profile?.username}
         </Button>
       </div>
     </div>
