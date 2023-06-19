@@ -2,9 +2,9 @@ FROM node:16-alpine AS install-dependencies
 
 WORKDIR /user/src/app
 
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json .npmrc ./
 
-RUN yarn install --frozen-lockfile --production=false
+RUN npm install --frozen-lockfile --production=false
 
 COPY . .
 
