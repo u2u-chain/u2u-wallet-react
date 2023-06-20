@@ -7,7 +7,7 @@ import {
   faUserPlus,
   faChalkboardUser
 } from "@fortawesome/pro-solid-svg-icons";
-export const COIN_CODE = 'hedera-hashgraph';
+export const COIN_CODE = 'usd';
 
 export const TOOlS_LIST = [
   {

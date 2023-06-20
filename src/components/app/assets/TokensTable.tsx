@@ -3,6 +3,7 @@ import {Table} from "antd";
 import {ColumnsType} from "antd/es/table";
 import {useAppSelector} from "@/redux/store.ts";
 import CurrencyWrapper from "@/components/app/wallet/CurrencyWrapper.tsx";
+import U2UCoinIcon from "@/assets/images/u2u-coin.png";
 
 interface DataType {
   key: string;
@@ -10,7 +11,6 @@ interface DataType {
   token: string;
   symbol: string;
   amount: number;
-  totalValue: number;
 }
 
 export default function TokensTable() {
@@ -18,11 +18,10 @@ export default function TokensTable() {
   const data: DataType[] = [
     {
       key: '1',
-      image: 'https://portal.hedera.com/assets/hedera-logo-black-a0b1bd4f.svg',
-      token: 'Hedera',
-      symbol: 'HBAR',
+      image: U2UCoinIcon,
+      token: 'U2U',
+      symbol: 'UU',
       amount: balance,
-      totalValue: 507.49
     }
   ];
 
