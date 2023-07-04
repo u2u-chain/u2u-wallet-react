@@ -10,8 +10,8 @@ export const loadAccountBalance = createAsyncThunk('app/load-balance', async (ar
 
   const response = await hederaService.getBalance(networkAccountId);
 
-  // hbars in number
-  return response.hbars.toBigNumber().toNumber();
+  // u2us in number
+  return response.u2us.toBigNumber().toNumber();
 });
 
 
