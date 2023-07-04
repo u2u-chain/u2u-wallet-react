@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import ApiService from "@/services/ApiService.ts";
 import HederaService from "@/services/HederaService.ts";
-import {PrivateKey} from "@hashgraph/sdk";
+import {PrivateKey} from "@u2u/sdk";
 
 export const doSignIn = createAsyncThunk('auth/sign-in', async (signInData: any) => {
   const response = await ApiService.login(signInData.email, signInData.password);

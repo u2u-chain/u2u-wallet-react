@@ -2,10 +2,10 @@ import {
   AccountBalanceQuery,
   AccountId,
   Client,
-  Hbar, Mnemonic, TransactionId,
+  U2U, Mnemonic, TransactionId,
   TransactionReceiptQuery, TransactionRecordQuery,
   TransferTransaction
-} from "@hashgraph/sdk";
+} from "@u2u/sdk";
 import axios from "axios";
 
 class HederaService {
@@ -32,8 +32,8 @@ class HederaService {
 
   async sendTokens(accountId: string, recipientId: string, amount: number) {
     const transaction = await new TransferTransaction()
-      .addHbarTransfer(accountId, Hbar.fromTinybars(-amount)) //Sending account
-      .addHbarTransfer(recipientId, Hbar.fromTinybars(amount)) //Receiving account
+      .addU2UTransfer(accountId, U2U.fromTinyU2U(-amount)) //Sending account
+      .addU2UTransfer(recipientId, U2U.fromTinyU2U(amount)) //Receiving account
       .execute(this.client);
     const receipt = await transaction.getReceipt(this.client);
     return {
