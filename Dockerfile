@@ -14,7 +14,10 @@ WORKDIR /user/src/app
 
 COPY --from=install-dependencies /user/src/app ./
 
-ENV VITE_APP_API_BASE=https://api-testnet-account.uniultra.xyz
+ENV VITE_APP_API_BASE=https://u2-api.uniultra.xyz
+ENV VITE_APP_NODE_ADDRESS=13.250.24.138:50211
+ENV VITE_APP_NODE_ACCOUNT_ID=3
+ENV VITE_APP_SCAN_API_BASE=https://u2utestnet.uniultra.xyz
 
 RUN npm run build
 

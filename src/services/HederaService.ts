@@ -13,8 +13,8 @@ class HederaService {
   scanApiBaseUrl = import.meta.env.VITE_APP_SCAN_API_BASE || 'https://testnet.mirrornode.hedera.com';
 
   constructor() {
-    const nodeAddress = import.meta.env.NODE_ADDRESS;
-    const nodeAccountId = import.meta.env.NODE_ACCOUNT_ID;
+    const nodeAddress = import.meta.env.VITE_APP_NODE_ADDRESS;
+    const nodeAccountId = import.meta.env.VITE_APP_NODE_ACCOUNT_ID;
     if (nodeAddress && nodeAccountId) {
       const nodes = {[nodeAddress]: new AccountId(parseInt(nodeAccountId))}
       this.client = Client.forNetwork(nodes);
