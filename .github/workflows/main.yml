@@ -49,5 +49,5 @@ jobs:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
 
       - name: Deploy
-        run: ssh -t -t ubuntu@$SSH_KNOWN_HOSTS "cd ~ && docker compose pull && docker compose up -d"
+        run: ssh -t -t ubuntu@${{secrets.PRODUCTION_HOST}} "cd ~ && docker compose pull && docker compose up -d"
         shell: bash
