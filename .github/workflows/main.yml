@@ -40,7 +40,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          ssh-keyscan volta.northstudio.dev >> ~/.ssh/known_hosts
+          ssh-keyscan $SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
           [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           ssh -t -t ubuntu@$SSH_KNOWN_HOSTS "cd ~ && docker compose pull && docker compose up -d"
