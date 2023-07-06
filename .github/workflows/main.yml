@@ -35,11 +35,15 @@ jobs:
 
       - name: Deploy
         run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ../private.key
-          sudo chmod 600 ../private.key
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          ssh -i "$SSH_PRIVATE_KEY" -t -t ubuntu@$SSH_KNOWN_HOSTS "cd ~ && docker compose pull && docker compose up -d"
+          command -v ssh-agent >/dev/null || ( apk add --update openssh )
+          eval $(ssh-agent -s)
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan volta.northstudio.dev >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+          ssh -t -t ubuntu@$SSH_KNOWN_HOSTS "cd ~ && docker compose pull && docker compose up -d"
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
