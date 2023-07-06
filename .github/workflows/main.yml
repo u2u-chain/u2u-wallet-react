@@ -9,10 +9,7 @@ on:
       tags:
         description: 'Test scenario tags'
   push:
-    branches: [main]
-
-env:
-  SSH_KNOWN_HOSTS: ${{ secrets.PRODUCTION_HOST }}
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
@@ -30,24 +27,21 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      -
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
           push: true
           tags: edwardultra/u2u-wallet:latest
 
-      - name: Write SSH Key
+      - name: Deploy
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > ../private.key
           sudo chmod 600 ../private.key
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh -i "$SSH_PRIVATE_KEY" -t -t ubuntu@$SSH_KNOWN_HOSTS "cd ~ && docker compose pull && docker compose up -d"
         shell: bash
         env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
-
-      - name: Deploy
-        run: ssh -t -t ubuntu@${{secrets.PRODUCTION_HOST}} "cd ~ && docker compose pull && docker compose up -d"
-        shell: bash
+          SSH_KNOWN_HOSTS: ${{ secrets.PRODUCTION_HOST }}
